@@ -18,8 +18,11 @@
 </ul>
 </blockquote>
 <h1 id="key用来做什么？"><a href="#key用来做什么？" class="headerlink" title="key用来做什么？"></a>key用来做什么？</h1><blockquote>
-<p>源代码仓库需要向执行仓库推送改变，那么执行仓库识别源代码仓库就需要 ssh-key 公私钥判定。<br><img src="/pri_key.png" alt="source"><br><img src="/pub_key.png" alt="source"></p>
+<p>源代码仓库需要向执行仓库推送改变，那么执行仓库识别源代码仓库就需要 ssh-key 公私钥判定。</p>
 </blockquote>
+<img src="/2022/02/09/cicd/pri_key.png" class="">
+<img src="/2022/02/09/cicd/pub_key.png" class="">
+
 <h1 id="deploy-yml-流程"><a href="#deploy-yml-流程" class="headerlink" title="deploy.yml 流程"></a>deploy.yml 流程</h1><blockquote>
 <ol>
 <li>在源代码仓库中监控 push 行为，如果监控到 push，则进行项目编译</li>
