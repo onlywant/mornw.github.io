@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="朝霞换夕阳">
+
+
+    <meta name="subtitle" content="蜉蝣天地，沧海一粟">
+
+
+    <meta name="description" content="记录生活的点滴">
+
+
+
+<title>博客启动！ | 朝霞换夕阳</title>
+
+
+
+    <link rel="icon" href="/title.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Mornw&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/categories">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Mornw&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/categories">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">博客启动！</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">朝霞换夕阳</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">六月 16, 2021&nbsp;&nbsp;12:32:11</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>blog.mornw.com!</p>
+<span id="more"></span>
+
+<h1 id="为什么写博客？"><a href="#为什么写博客？" class="headerlink" title="为什么写博客？"></a>为什么写博客？</h1><p>看见舍友的网站是在是好看，羡慕之余，自然也想自己做一个。</p>
+<h1 id="做个什么样的网站？"><a href="#做个什么样的网站？" class="headerlink" title="做个什么样的网站？"></a>做个什么样的网站？</h1><p>问：越简单越好不是吗？<br>答：轻量级博客，静态网站、方便的整理自己的文章。让我找到了HEXO。</p>
+<p>问：需要评论功能吗？<br>答：不需要，也没人看不是吗（当然我也想让人看啦！T.T）</p>
+<p>问：图床用什么呀？<br>答：我是十分倾向于选择 github 的，很多人都说 github 访问速度慢，目前就使用 CDN 加速吧。</p>
+<h1 id="开始博客搭建"><a href="#开始博客搭建" class="headerlink" title="开始博客搭建"></a>开始博客搭建</h1><p>想写博客，当然是先搭建图床啦！</p>
+<h2 id="1-图床"><a href="#1-图床" class="headerlink" title="1. 图床"></a>1. 图床</h2><ol>
+<li><p>在 github 上创建一个公开的图床仓库。</p>
+</li>
+<li><p>下载 PicGO。</p>
+</li>
+</ol>
+<ul>
+<li><p>github 生成自己的 token 时，需要勾选 repo 项。<br>  <img src="https://raw.githubusercontent.com/onlywant/blog_img/main/img/hexo_write/20220211152431.png"></p>
+</li>
+<li><p>设置 CDN 加速<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211153922.png"></p>
+</li>
+</ul>
+<h2 id="2-安装-hexo-hexo-theme-melody"><a href="#2-安装-hexo-hexo-theme-melody" class="headerlink" title="2. 安装 hexo + hexo-theme-melody"></a>2. 安装 hexo + hexo-theme-melody</h2><ol>
+<li><p>在 github 上创建一个 github pages。<br> 比如我的是： onlywant.github.io</p>
+</li>
+<li><p>安装 nodejs 和 npm。</p>
+</li>
+<li><p>创建一个博客文件夹</p>
+</li>
+<li><p><code>npm install hexo --save</code></p>
+</li>
+<li><p><code>npm install hexo-theme-melody --save</code></p>
+</li>
+<li><p>即可使用<code>hexo -g &amp;&amp; hexo -s</code>，生成自己的博客，本地查看。</p>
+</li>
+<li><p>推送到远端仓库</p>
+<ul>
+<li><p>设置博客根目录中的<code>_config.yml</code>中的<code>deploy</code>项为自己的 github pages 地址。<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211154803.png"></p>
+</li>
+<li><p>即可使用<code>hexo -d</code>推送到远端。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-使用github-actions自动编译发布网站"><a href="#3-使用github-actions自动编译发布网站" class="headerlink" title="3. 使用github actions自动编译发布网站"></a>3. 使用github actions自动编译发布网站</h2><ol>
+<li><p>在 github 上创建 blog 源代码仓库，上传自己的源代码。<br><img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211155536.png"></p>
+</li>
+<li><p>设置两个仓库的沟通桥梁</p>
+<ul>
+<li>使用 ssh-keygen 生成一对公私钥。</li>
+<li>在源代码仓库<code>settings-&gt;secrets-&gt;actions</code>中添加 <code>HEXO_DEPLOY_PRI</code>，内容为私钥。<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211160209.png"></li>
+<li>在 pages 仓库<code>settings-&gt;deploy keys</code>中添加 <code>HEXO_DEPLOY_PUB</code>， 内容为公钥。<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211160502.png"></li>
+</ul>
+</li>
+<li><p>在仓库根目录下添加<code>.github/workflow/deploy.yml</code>文件。内容如下：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">name: CI</span><br><span class="line"></span><br><span class="line">on:</span><br><span class="line">push:</span><br><span class="line">	branches:</span><br><span class="line">	- master</span><br><span class="line"></span><br><span class="line">env:</span><br><span class="line">GIT_USER: 你的名字</span><br><span class="line">GIT_EMAIL: 你的email地址</span><br><span class="line">DEPLOY_REPO: 推送到的仓库</span><br><span class="line">DEPLOY_BRANCH: 仓库分支</span><br><span class="line"></span><br><span class="line">jobs:</span><br><span class="line">build:</span><br><span class="line">	name: Build on node $&#123;&#123; matrix.node_version &#125;&#125; and $&#123;&#123; matrix.os &#125;&#125;</span><br><span class="line">	runs-on: ubuntu-latest</span><br><span class="line">	strategy:</span><br><span class="line">	matrix:</span><br><span class="line">		os: [ubuntu-latest]</span><br><span class="line">		node_version: [12.x]</span><br><span class="line"></span><br><span class="line">	steps:</span><br><span class="line">	- name: Checkout</span><br><span class="line">		uses: actions/checkout@v2</span><br><span class="line"></span><br><span class="line">	- name: Checkout deploy repo</span><br><span class="line">		uses: actions/checkout@v2</span><br><span class="line">		with:</span><br><span class="line">		repository: $&#123;&#123; env.DEPLOY_REPO &#125;&#125;</span><br><span class="line">		ref: $&#123;&#123; env.DEPLOY_BRANCH &#125;&#125;</span><br><span class="line">		path: .deploy_git</span><br><span class="line"></span><br><span class="line">	- name: Use Node.js $&#123;&#123; matrix.node_version &#125;&#125;</span><br><span class="line">		uses: actions/setup-node@v1</span><br><span class="line">		with:</span><br><span class="line">		node-version: $&#123;&#123; matrix.node_version &#125;&#125;</span><br><span class="line"></span><br><span class="line">	- name: Configuration environment</span><br><span class="line">		env:</span><br><span class="line">		HEXO_DEPLOY_PRI: $&#123;&#123;secrets.HEXO_DEPLOY_PRI&#125;&#125;</span><br><span class="line">		run: |</span><br><span class="line">		sudo timedatectl set-timezone &quot;Asia/Shanghai&quot;</span><br><span class="line">		mkdir -p ~/.ssh/</span><br><span class="line">		echo &quot;$HEXO_DEPLOY_PRI&quot; &gt; ~/.ssh/id_rsa</span><br><span class="line">		chmod 600 ~/.ssh/id_rsa</span><br><span class="line">		ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><br><span class="line">		git config --global user.name $GIT_USER</span><br><span class="line">		git config --global user.email $GIT_EMAIL</span><br><span class="line">	- name: Install dependencies</span><br><span class="line">		run: |</span><br><span class="line">		npm install</span><br><span class="line">	- name: Deploy hexo</span><br><span class="line">		run: |</span><br><span class="line">		npm run clean</span><br><span class="line">		npm run build</span><br><span class="line">		npm run deploy</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>朝霞换夕阳</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://blog.mornw.com/2021/06/16/%E6%97%A5%E8%AE%B0/hexo_write/">http://blog.mornw.com/2021/06/16/%E6%97%A5%E8%AE%B0/hexo_write/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/hexo/"># hexo</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/25/%E6%80%A8%E4%B8%96%E9%97%B4%E5%86%8D%E6%97%A0BUG/vmware%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E9%87%8A%E6%94%BE/">vmware磁盘空间释放</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 朝霞换夕阳 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
