@@ -239,7 +239,7 @@
 <h2 id="变量的区别"><a href="#变量的区别" class="headerlink" title="变量的区别"></a>变量的区别</h2><ol>
 <li><strong>全局变量</strong>：全局作用域。只需要在一个源文件中定义，就可以作用于所有源文件，但是，在其他源文件中使用时，需要使用<code>extern</code>关键字声明</li>
 <li><strong>静态全局变量</strong>：文件作用域。即被 <code>static</code> 修饰的变量，只在该源文件内起作用。</li>
-<li><strong>局部变量</strong>：局部作用域。向循环内部生命的变量，代码块执行完成后撤销，内存被收回。</li>
+<li><strong>局部变量</strong>：局部作用域。向循环内部声明的变量，代码块执行完成后撤销，内存被收回。</li>
 <li><strong>静态局部变量</strong>：局部作用域。只被初始化一次，从初始化到程序运行结束一直存在。只不过只被定义自己的函数体可见。</li>
 </ol>
 <hr>
@@ -274,7 +274,7 @@
 <h1 id="Part-II-语言对比"><a href="#Part-II-语言对比" class="headerlink" title="Part II 语言对比"></a>Part II 语言对比</h1><h2 id="C-11-新特性"><a href="#C-11-新特性" class="headerlink" title="C++ 11 新特性"></a>C++ 11 新特性</h2><ol>
 <li><p><code>auto</code> 类型推导。编译器会在 <strong>编译期间</strong> 通过初始值推到出变量的类型。</p>
 </li>
-<li><p><code>decltype</code> 类型推导。是“declare type”的缩写，译为“生命类型”。<code>decltype</code> 作用是选择并返回操作数的数据类型。</p>
+<li><p><code>decltype</code> 类型推导。是“declare type”的缩写，译为“声明类型”。<code>decltype</code> 作用是选择并返回操作数的数据类型。</p>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto var = var1 + var2;</span><br><span class="line">decltype(var1 + var2) var = 0;</span><br></pre></td></tr></table></figure></li>
 <li><p><code>lambda</code> 表达式</p>
 </li>
@@ -335,7 +335,7 @@
 </ol>
 <hr>
 <h2 id="多态的实现"><a href="#多态的实现" class="headerlink" title="多态的实现"></a>多态的实现</h2><ol>
-<li>在类中使用<code>virtual</code>关键字生命的函数叫做虚函数。</li>
+<li>在类中使用<code>virtual</code>关键字声明的函数叫做虚函数。</li>
 <li>存在虚函数的类都有一个虚函数表，当创建一个该类的对象时，该对象有一个指向虚函数表的虚表指针。</li>
 <li>当基类指针指向派生类对象，基类调用虚函数，基类指针指向派生类的虚表指针，由于该虚表指针指向派生类虚函数表，通过遍历虚表，寻找相应的虚函数。</li>
 </ol>
@@ -366,7 +366,7 @@
 <p>作用：<br>    - const 修饰成员变量，可进行类型检查，节省内存空间，提高效率。<br>    - 修饰函数参数，使函数参数的值不可改变。<br>    - 修饰成员函数，使成员函数不能修改成员变量，也不能调用非 const 成员函数。</p>
 </blockquote>
 <blockquote>
-<p>用法<br>    - <strong>const 成员变量只能在类内生命，在构造函数初始化列表中初始化</strong></p>
+<p>用法<br>    - <strong>const 成员变量只能在类内声明，在构造函数初始化列表中初始化</strong></p>
 </blockquote>
 <hr>
 <h2 id="define-和-const-区别"><a href="#define-和-const-区别" class="headerlink" title="define 和 const 区别"></a>define 和 const 区别</h2><ul>
