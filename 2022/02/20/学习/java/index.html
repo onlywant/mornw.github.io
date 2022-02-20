@@ -17,7 +17,7 @@
 
 
 
-<title>力扣刷题小技巧 | 朝霞换夕阳</title>
+<title>java 复习 | 朝霞换夕阳</title>
 
 
 
@@ -197,7 +197,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">力扣刷题小技巧</h1>
+            <h1 class="post-title">java 复习</h1>
             
                 <div class="post-meta">
                     
@@ -206,14 +206,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">二月 1, 2022&nbsp;&nbsp;9:27:58</a>
+                        Date: <a href="#">二月 20, 2022&nbsp;&nbsp;8:59:41</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E6%80%9D%E7%BB%B4/">思维</a>
+                                <a href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
                             
                         </span>
                     
@@ -222,28 +222,39 @@
         </header>
 
         <div class="post-content">
-            <p>不断学习，不断进步。<br>山外青山楼外楼</p>
-<span id="more"></span>
-<h2 id="if-语句中-nullptr-和-！区别"><a href="#if-语句中-nullptr-和-！区别" class="headerlink" title="if 语句中 nullptr 和 ！区别"></a><code>if</code> 语句中 <code>nullptr</code> 和 <code>！</code>区别</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!p)</span><br><span class="line">#<span class="meta"># equals;</span></span><br><span class="line"><span class="keyword">if</span> (p == <span class="literal">nullptr</span>)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="懒惰标记"><a href="#懒惰标记" class="headerlink" title="懒惰标记"></a>懒惰标记</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录动作，而不真正的执行。</span></span><br><span class="line"><span class="comment">// bitset的翻转操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bitset</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> flips;</span><br><span class="line">    <span class="built_in">bitset</span>() &#123;</span><br><span class="line">        flips = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">flip</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        flips ^= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="异或-1-取反"><a href="#异或-1-取反" class="headerlink" title="异或 1 取反"></a>异或 1 取反</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x ^= <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="前后缀分解-dp"><a href="#前后缀分解-dp" class="headerlink" title="前后缀分解 + dp"></a>前后缀分解 + dp</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般有三种操作，前、后和其他，都可以分解前后缀。</span></span><br><span class="line"><span class="comment">// leetcode 6003</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="自定义hash函数，-参数必须加const"><a href="#自定义hash函数，-参数必须加const" class="headerlink" title="自定义hash函数， 参数必须加const"></a>自定义hash函数， 参数必须加const</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> hash_p = [&amp;](pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &amp;p) -&gt; <span class="keyword">size_t</span>&#123;</span><br><span class="line">    <span class="keyword">static</span> hash&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; hash_ll;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">hash_ll</span>((<span class="keyword">static_cast</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt;(p.first) &lt;&lt; <span class="number">32</span>) + p.second);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="写完程序之后样例怎么设置"><a href="#写完程序之后样例怎么设置" class="headerlink" title="写完程序之后样例怎么设置"></a>写完程序之后样例怎么设置</h2><p>一定要测数组元素数量的边界：0, 1, 2, 4;</p>
-<hr>
-<h2 id="让一个数的最后一个为1的二进制位变成零"><a href="#让一个数的最后一个为1的二进制位变成零" class="headerlink" title="让一个数的最后一个为1的二进制位变成零"></a>让一个数的最后一个为1的二进制位变成零</h2><p>n &amp; (n - 1)</p>
-<hr>
-<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>只需要明白一个函数的作用并相信它能完成这个任务</p>
+            <h1 id="java-复习"><a href="#java-复习" class="headerlink" title="java 复习"></a>java 复习</h1><h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fnlingnzb-learner/p/11990943.html">类加载</a></h2><p>类从被加载到虚拟机内存中开始，直到卸载出内存为止，它的整个生命周期包括了：<strong>加载、验证、准备、解析、初始化、使用和卸载</strong>这7个阶段。其中，<strong>验证、准备和解析</strong>这三个部分统称为连接（Linking）。</p>
+<h3 id="何时开始类的初始化。"><a href="#何时开始类的初始化。" class="headerlink" title="何时开始类的初始化。"></a>何时开始类的初始化。</h3><p>什么情况下需要开始类加载过程的第一个阶段：“<strong>加载</strong>”。虚拟机规范中并没强行约束，这点可以交给虚拟机的的具体实现自由把握，但是<strong>对于初始化阶段虚拟机规范是严格规定了如下几种情况</strong>，如果类未初始化会对类进行初始化。</p>
+<ol>
+<li>创建类的实例</li>
+<li>访问类的静态变量</li>
+<li>访问类的静态方法</li>
+<li>反射</li>
+<li>当初始化一个类时，发现其父类还未初始化，则先触发父类的初始化</li>
+<li>虚拟机启动时，定义了main()方法的那个类先初始化</li>
+</ol>
+<p>以上情况称为称对一个类进行“<strong>主动引用</strong>”，除此种情况之外，均不会触发类的初始化，称为“<strong>被动引用</strong>”</p>
+<p><strong>被动引用</strong>：</p>
+<ol>
+<li>子类调用父类的静态变量，子类不会被初始化。只有父类被初始化</li>
+<li>通过数组定义来引用类，不会触发类的初始化</li>
+<li>访问类的常量，不会初始化类</li>
+</ol>
+<h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><ol>
+<li><strong>加载</strong>：类加载”(Class Loading)过程的第一个阶段。</li>
+<li><strong>验证</strong></li>
+<li><strong>准备</strong>：准备阶段是为类的静态变量分配内存并将其初始化为默认值，这些内存都将在方法区中进行分配。准备阶段不分配类中的实例变量的内存，实例变量将会在对象实例化时随着对象一起分配在Java堆中。</li>
+<li><strong>解析</strong></li>
+<li><strong>初始化</strong>：类初始化是类加载过程的最后一步，前面的类加载过程，除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作完全由虚拟机主导和控制。<strong>到了初始化阶段，才真正开始执行类中定义的Java程序代码</strong></li>
+</ol>
+<p>如有继承，初始化步骤：</p>
+<ol>
+<li>基类静态</li>
+<li>派生类静态</li>
+<li>基类普通代码块</li>
+<li>基类构造函数</li>
+<li>派生类普通代码块</li>
+<li>派生类构造函数。</li>
+</ol>
 
         </div>
 
@@ -258,7 +269,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://blog.mornw.com/2022/02/01/%E5%AD%A6%E4%B9%A0/leetcode/">http://blog.mornw.com/2022/02/01/%E5%AD%A6%E4%B9%A0/leetcode/</a></span>
+                        <span><a href="http://blog.mornw.com/2022/02/20/%E5%AD%A6%E4%B9%A0/java/">http://blog.mornw.com/2022/02/20/%E5%AD%A6%E4%B9%A0/java/</a></span>
                     </p>
                 
                 
@@ -282,7 +293,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/%E5%8A%9B%E6%89%A3/"># 力扣</a>
+                        <a href="/tags/java/"># java</a>
                     
                         
                 </span>
@@ -295,10 +306,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/02/04/%E7%94%9F%E6%B4%BB/workflowy/">每日小计划</a>
             
-            
-            <a class="next" rel="next" href="/2021/06/25/%E6%80%A8%E4%B8%96%E9%97%B4%E5%86%8D%E6%97%A0BUG/vmware%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E9%87%8A%E6%94%BE/">vmware磁盘空间释放</a>
+            <a class="next" rel="next" href="/2022/02/19/%E5%AD%A6%E4%B9%A0/edge-of-computing/">边缘计算</a>
             
         </section>
 
