@@ -17,7 +17,7 @@
 
 
 
-<title>C++高级特性 | 朝霞换夕阳</title>
+<title>C++新特性 | 朝霞换夕阳</title>
 
 
 
@@ -131,11 +131,73 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">C++高级特性</h1>
+            <h1 class="post-title">C++新特性</h1>
             
                 <div class="post-meta">
                     
@@ -160,7 +222,42 @@
         </header>
 
         <div class="post-content">
-            
+            <h1 id="C-新特性"><a href="#C-新特性" class="headerlink" title="C++新特性"></a>C++新特性</h1><h2 id="C-11"><a href="#C-11" class="headerlink" title="C++11"></a>C++11</h2><h3 id="auto-amp-decltype"><a href="#auto-amp-decltype" class="headerlink" title="auto &amp; decltype"></a>auto &amp; decltype</h3><p>可以在<strong>编译阶段</strong>推导出变量或者表达式的类型。<br><strong>auto：</strong> 推导 变量类型。<br><code>auto x = 1;</code><br><strong>decltype：</strong> 推导 表达式类型。<br><code>decltype(x);</code></p>
+<h3 id="左值-和-右值"><a href="#左值-和-右值" class="headerlink" title="左值 和 右值"></a>左值 和 右值</h3><p><strong>左值：</strong> 可以取地址，有名字<br><strong>右值：</strong> 不能取地址、没有名字<br><strong>纯右值：</strong> 运算表达式产生的临时变量，非引用返回的临时变量，lambda表达式等。<br><strong>将亡值：</strong> 将要销毁的值<br><strong>左值引用：</strong><br><strong>右值引用：</strong>：</p>
+<blockquote>
+<p>右值引用出现之前, 右值的地址只能绑定到常量左值</p>
+</blockquote>
+<p><strong>移动语义：</strong> </p>
+<blockquote>
+<p>为了解决进行大数据复制的时候，进行大量的数据移动，记节省空间又提高效率。<br>转移资源所有权，类似于转让或者资源窃取，对于那个资源，转为自己所有，别人不再拥有也不会再使用。</p>
+</blockquote>
+<p><strong>移动构造函数：</strong></p>
+<blockquote>
+<p><strong>std::move的本质</strong>，就是一个转换函数，将给定的类型转化为右值引用，而并不是真正地“移动”了资源</p>
+</blockquote>
+<blockquote>
+<p>如果同时提供了复制构造函数和移动构造函数(或运算符)，<strong>则当实参为右值 (如临时变量或 std::move函数的结果) 时，将会调用移动构造函数</strong>，<strong>当实参为左值时，选择复制赋值</strong>。若仅提供了复制赋值，则所有值类别时都选择它（只要它按值或按到 const 的引用接收其实参），这使得在移动不可用时，以复制赋值成为移动赋值的后备。<br>注: 如果在执行移动语义时, 涉及的数据中有指向堆内存的指针, 该指针交出数据的所有权，为了不出现析构两次同一内存区域，<strong>要将交出所有权的数据的指向动态申请内存区的指针赋值为空指针</strong>(如 nullptr)，而对空指针执行delete &#x2F; delete[]是合法的</p>
+</blockquote>
+<p><strong>完美转发：</strong> 可以写一个接受任意实参的函数模板，并转发到其他函数，目标函数会受到与转发函数完全相同的实参</p>
+<h3 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h3><p>C++11中可以直接在变量名后加上初始化列表进行对象的初始化。</p>
+<h3 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h3><p>对函数的封装发挥到了极致。</p>
+<h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><h3 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h3><p>解决内存泄露问题，构造函数不能被隐式调用</p>
+<p><strong>摒弃auto_ptr的原因</strong>，一句话总结就是：避免潜在的内存崩溃问题。</p>
+<ol>
+<li><strong>std::shared_ptr</strong>：使用了引用计数，每一个shared_ptr的拷贝都指向相同的内存，每次拷贝都会触发引用计数+1，每次生命周期结束析构的时候引用计数-1，在最后一个shared_ptr析构的时候，内存才会释放。</li>
+<li>std::weak_ptr</li>
+<li>std::unique_ptr</li>
+</ol>
+<h3 id="范围for"><a href="#范围for" class="headerlink" title="范围for"></a>范围for</h3><h3 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h3><h3 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h3><p>空指针引入的常量值。</p>
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>delele函数在c++11中很常用，std::unique_ptr就是通过delete修饰来禁止对象的拷贝的</p>
+<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><blockquote>
+<p><strong>编译时的常量和常量函数</strong></p>
+</blockquote>
+<blockquote>
+<p>与const区别：<br>两者都代表可读，const只表示read only的语义，只保证了运行时不可以被修改，但它修饰的仍然有可能是个动态变量，而constexpr修饰的才是真正的常量，它会在编译期间就会被计算出来，整个运行过程中都不可以被改变，<strong>constexpr可以用于修饰函数，这个函数的返回值会尽可能在编译期间被计算出来当作一个常量，但是如果编译期间此函数不能被计算出来，那它就会当作一个普通函数被处理。</strong></p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">   <span class="built_in">func</span>(i);<span class="comment">// 普通函数</span></span><br><span class="line">   <span class="built_in">func</span>(<span class="number">2</span>);<span class="comment">// 编译期间就会被计算出来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
         </div>
 
         

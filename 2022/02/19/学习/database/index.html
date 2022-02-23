@@ -131,6 +131,68 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
@@ -163,6 +225,8 @@
             <p>ORM</p>
 <p>NoSQL</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/181498475">LSM 树</a></p>
+<h1 id="数据库复习"><a href="#数据库复习" class="headerlink" title="数据库复习"></a>数据库复习</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>数据库的目录。相当于字典上的字母目录。<br><strong>优点：</strong> 查的快<br><strong>缺点：</strong> 增删改慢，同步维护索引<br><strong>结构：</strong> B+树</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>1.表设计是否规范，是否符合三范式的标准<br>（1）第一范式：保证原子性（不可拆分）<br>（2）第二范式：每张表都有主键<br>（3）第三范式（每一列都有主键相关)<br>2.查看数据表中是否存在大量的冗余字段，字段数据类型是否合理<br>3.尽可能的使用varchar代替char 建表数据类型，能用数值的绝对不用字符存储<br>4.尽量避免null值，使用默认值替代空值，数值型可以使用0，字符型可以使用空字符串</p>
 
         </div>
 
