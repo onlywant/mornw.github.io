@@ -17,7 +17,7 @@
 
 
 
-<title>Java复习 | 朝霞换夕阳</title>
+<title>binary_search | 朝霞换夕阳</title>
 
 
 
@@ -131,73 +131,11 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
-
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Java复习</h1>
+            <h1 class="post-title">binary_search</h1>
             
                 <div class="post-meta">
                     
@@ -206,56 +144,16 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">二月 20, 2022&nbsp;&nbsp;8:59:41</a>
+                        Date: <a href="#">二月 24, 2022&nbsp;&nbsp;10:15:18</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/%E8%AF%AD%E8%A8%80/">语言</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <h1 id="java-复习"><a href="#java-复习" class="headerlink" title="java 复习"></a>java 复习</h1><h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fnlingnzb-learner/p/11990943.html">类加载</a></h2><p>类从被加载到虚拟机内存中开始，直到卸载出内存为止，它的整个生命周期包括了：<strong>加载、验证、准备、解析、初始化、使用和卸载</strong>这7个阶段。其中，<strong>验证、准备和解析</strong>这三个部分统称为连接（Linking）。</p>
-<h3 id="何时开始类的初始化。"><a href="#何时开始类的初始化。" class="headerlink" title="何时开始类的初始化。"></a>何时开始类的初始化。</h3><p>什么情况下需要开始类加载过程的第一个阶段：“<strong>加载</strong>”。虚拟机规范中并没强行约束，这点可以交给虚拟机的的具体实现自由把握，但是<strong>对于初始化阶段虚拟机规范是严格规定了如下几种情况</strong>，如果类未初始化会对类进行初始化。</p>
-<ol>
-<li>创建类的实例</li>
-<li>访问类的静态变量</li>
-<li>访问类的静态方法</li>
-<li>反射</li>
-<li>当初始化一个类时，发现其父类还未初始化，则先触发父类的初始化</li>
-<li>虚拟机启动时，定义了main()方法的那个类先初始化</li>
-</ol>
-<p>以上情况称为称对一个类进行“<strong>主动引用</strong>”，除此种情况之外，均不会触发类的初始化，称为“<strong>被动引用</strong>”</p>
-<p><strong>被动引用</strong>：</p>
-<ol>
-<li>子类调用父类的静态变量，子类不会被初始化。只有父类被初始化</li>
-<li>通过数组定义来引用类，不会触发类的初始化</li>
-<li>访问类的常量，不会初始化类</li>
-</ol>
-<h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><ol>
-<li><strong>加载</strong>：类加载”(Class Loading)过程的第一个阶段。</li>
-<li><strong>验证</strong></li>
-<li><strong>准备</strong>：准备阶段是为类的静态变量分配内存并将其初始化为默认值，这些内存都将在方法区中进行分配。准备阶段不分配类中的实例变量的内存，实例变量将会在对象实例化时随着对象一起分配在Java堆中。</li>
-<li><strong>解析</strong></li>
-<li><strong>初始化</strong>：类初始化是类加载过程的最后一步，前面的类加载过程，除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作完全由虚拟机主导和控制。<strong>到了初始化阶段，才真正开始执行类中定义的Java程序代码</strong></li>
-</ol>
-<p>如有继承，初始化步骤：</p>
-<ol>
-<li>基类静态</li>
-<li>派生类静态</li>
-<li>基类普通代码块</li>
-<li>基类构造函数</li>
-<li>派生类普通代码块</li>
-<li>派生类构造函数。</li>
-</ol>
-
+            
         </div>
 
         
@@ -269,7 +167,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://blog.mornw.com/2022/02/20/%E5%AD%A6%E4%B9%A0/java/">http://blog.mornw.com/2022/02/20/%E5%AD%A6%E4%B9%A0/java/</a></span>
+                        <span><a href="http://blog.mornw.com/2022/02/24/binary-search/">http://blog.mornw.com/2022/02/24/binary-search/</a></span>
                     </p>
                 
                 
@@ -292,10 +190,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/java/"># java</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -306,10 +200,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/02/24/binary-search/">binary_search</a>
             
-            
-            <a class="next" rel="next" href="/2022/02/19/%E5%AD%A6%E4%B9%A0/edge-of-computing/">边缘计算</a>
+            <a class="next" rel="next" href="/2022/02/20/%E5%AD%A6%E4%B9%A0/java/">Java复习</a>
             
         </section>
 
