@@ -17,7 +17,7 @@
 
 
 
-<title>binary_search | 朝霞换夕阳</title>
+<title>TPM 原理 | 朝霞换夕阳</title>
 
 
 
@@ -131,11 +131,73 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">binary_search</h1>
+            <h1 class="post-title">TPM 原理</h1>
             
                 <div class="post-meta">
                     
@@ -144,16 +206,47 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">二月 24, 2022&nbsp;&nbsp;10:15:18</a>
+                        Date: <a href="#">三月 1, 2022&nbsp;&nbsp;17:32:25</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97/">可信计算</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            
+            <h1 id="TPM-原理"><a href="#TPM-原理" class="headerlink" title="TPM 原理"></a>TPM 原理</h1><h2 id="TPM-构成"><a href="#TPM-构成" class="headerlink" title="TPM 构成"></a>TPM 构成</h2><p><strong>逻辑功能</strong></p>
+<ol>
+<li>密码学系统。实现数据加密、数字签名、密码杂凑和随机数生成的各类密码算法的计算引擎，不对外提供接口的内部功能模块。</li>
+<li>平台数据保护。对外提供秘钥管理和各类数据机密性、完整性保护功能，是直接体现密码学系统的功能类别。<strong>依赖该功能的秘钥管理和密码学计算器</strong>。</li>
+<li>身份标识功能。对外提供身份标识秘钥的申请与管理，<strong>远程证明的基础</strong>。</li>
+<li>完整性存储和报告。对外提供完整性值存储和签署功能，直接体现“可信性”。<strong>依赖该功能可以构建平台内部的信任链，还可以向外部实体进行远程证明</strong></li>
+</ol>
+<p><strong>硬件构成</strong>：</p>
+<ol>
+<li>密码引擎</li>
+<li>电源</li>
+<li>时钟</li>
+<li>存储器</li>
+</ol>
+<h2 id="秘钥类型"><a href="#秘钥类型" class="headerlink" title="秘钥类型"></a>秘钥类型</h2><ol>
+<li>身份秘钥：根秘钥，标识 TPM 和计算平台的身份，用于引证完整性报告</li>
+<li>绑定秘钥：用于数据的加密和解密</li>
+<li>签名秘钥：用于对用户选定的数据进行签名，也可用于引证平台完整性</li>
+</ol>
+<h2 id="TPM-完整性存储与报告"><a href="#TPM-完整性存储与报告" class="headerlink" title="TPM 完整性存储与报告"></a>TPM 完整性存储与报告</h2><h3 id="完整性度量"><a href="#完整性度量" class="headerlink" title="完整性度量"></a>完整性度量</h3><p>BIOS-&gt;BOOTLOADER-&gt;OS Kernel 逐级度量。度量<strong>代码的密码杂凑值（表征完整性）</strong>，将度量结果放在：<strong>平台配置寄存器（PCR）中</strong></p>
+<p>PCR 值以扩展的方式更改：**新PCR &#x3D; Hash(原PCR值 || 扩展值)**，具有顺序性和单向性。</p>
+<h3 id="远程证明"><a href="#远程证明" class="headerlink" title="远程证明"></a>远程证明</h3><p><strong>证明方</strong>：将所有被度量的软硬件信息发送给挑战方，包括完整性hash值。<br><strong>挑战方</strong>：根据证明方提供的软硬件信息列表，<strong>自行获取软硬件的标准完整性值，并计算PCR的扩展结果</strong>。最后验证是否一致。</p>
+<h2 id="动态可信度量根"><a href="#动态可信度量根" class="headerlink" title="动态可信度量根"></a>动态可信度量根</h2><p>DRTM 可以在平台启动后任意时刻触发，能够基于硬件和程序代码简历一个隔离的安全可执行环境。<br><strong>基于CPU指令</strong>，将用户代码加载到SLB（secure loader block）内存区间，能够提供硬件级的DMA保护。</p>
+<p>动态可信链：根据安全指令</p>
+
         </div>
 
         
@@ -167,7 +260,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://blog.mornw.com/2022/02/24/binary-search/">http://blog.mornw.com/2022/02/24/binary-search/</a></span>
+                        <span><a href="http://blog.mornw.com/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/">http://blog.mornw.com/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/</a></span>
                     </p>
                 
                 
@@ -190,6 +283,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97/"># 可信计算</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -200,10 +297,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/">TPM 原理</a>
             
-            
-            <a class="next" rel="next" href="/2022/02/20/%E5%AD%A6%E4%B9%A0/java/">Java复习</a>
+            <a class="next" rel="next" href="/2022/02/24/binary-search/">binary_search</a>
             
         </section>
 
