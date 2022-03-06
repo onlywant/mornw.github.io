@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="朝霞换夕阳">
+
+
+    <meta name="subtitle" content="蜉蝣天地，沧海一粟">
+
+
+    <meta name="description" content="记录生活的点滴">
+
+
+
+<title>操作系统复习 | 朝霞换夕阳</title>
+
+
+
+    <link rel="icon" href="/title.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Mornw&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/categories">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Mornw&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/categories">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">操作系统复习</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">朝霞换夕阳</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 2, 2022&nbsp;&nbsp;16:35:17</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="操作系统复习"><a href="#操作系统复习" class="headerlink" title="操作系统复习"></a>操作系统复习</h1><p>操作系统是在应用和硬件之间的异层软件，对上层软件提供硬件抽象，对底层硬件进行管理。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150676148">思维导图</a></p>
+<h2 id="一、程序"><a href="#一、程序" class="headerlink" title="一、程序"></a>一、程序</h2><p>顺序执行：顺序性，封闭性（占全机资源）、可再现性<br>并发执行：间断性，失去封闭性，不可再现性</p>
+<h2 id="二、进程"><a href="#二、进程" class="headerlink" title="二、进程"></a>二、进程</h2><h3 id="特征："><a href="#特征：" class="headerlink" title="特征："></a>特征：</h3><p>结构特征：进程 &#x3D; 程序 + 数据 + PCB<br>动态性：能创建和撤销，有生命周期<br>独立性：独立分配资源，独立运行，独立调度<br>并发性：<br>异步性：不可预知的速度推进</p>
+<h3 id="PCB"><a href="#PCB" class="headerlink" title="PCB"></a>PCB</h3><p><strong>作用</strong>：使进程能够与其他进程并发执行<br><strong>信息</strong>：<br>    1. 进程标识符<br>    2. 处理机状态：寄存器<br>    3. 进程调度信息：进程状态，优先级，阻塞事件，进程调度算法所需信息。<br>    4. 进程控制信息：程序地址、进程同步和通信信息，资源清单，下一个PCB链接指针<br><strong>组织方式</strong>：<br>    1. 链式<br>    2. 线性<br>    3. 索引：</p>
+<h3 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h3><ol>
+<li>就绪</li>
+<li>执行</li>
+<li>阻塞</li>
+</ol>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p><strong>事件</strong></p>
+<ol>
+<li>用户登陆</li>
+<li>作业调度</li>
+<li>提供服务：打印服务</li>
+<li>应用请求</li>
+</ol>
+<p><strong>过程</strong></p>
+<ol>
+<li>申请空白PCB，从空闲队列索取一个不用的</li>
+<li>为新进程分配资源，内存、文件、CPU等</li>
+<li>初始化PCB</li>
+<li>插入就绪队列</li>
+</ol>
+<h3 id="终止"><a href="#终止" class="headerlink" title="终止"></a>终止</h3><p><strong>事件</strong></p>
+<ol>
+<li>正常结束</li>
+<li>异常结束</li>
+<li>外界干预</li>
+</ol>
+<p><strong>过程</strong></p>
+<ol>
+<li>找到该进程PCB，读取状态，可能是阻塞、就绪、执行</li>
+<li>如果是运行态，终止执行，</li>
+<li>如果有子孙进程，终止执行</li>
+<li>将全部资源回收父进程或系统</li>
+<li>将PCB回收，挂到空闲队列</li>
+</ol>
+<h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><p><strong>事件</strong></p>
+<ol>
+<li>向系统请求共享资源失败</li>
+<li>等待某种操作完成</li>
+<li>等待新任务到达</li>
+<li>等待新数据的到达</li>
+</ol>
+<p><strong>过程</strong></p>
+<ol>
+<li>阻塞原语 block 阻塞自己</li>
+<li>PCB 状态改为阻塞</li>
+<li>进入该事件的阻塞队列</li>
+<li>调度程序重新调度</li>
+</ol>
+<h3 id="唤醒"><a href="#唤醒" class="headerlink" title="唤醒"></a>唤醒</h3><p><strong>过程</strong></p>
+<ol>
+<li>从阻塞队列移除</li>
+<li>将PCB状态改为就绪</li>
+<li>进入就绪队列</li>
+</ol>
+<h3 id="挂起和激活"><a href="#挂起和激活" class="headerlink" title="挂起和激活"></a>挂起和激活</h3><p><strong>挂起</strong>：</p>
+<ol>
+<li>活动就绪-&gt;静止就绪</li>
+<li>活动阻塞-&gt;静止阻塞</li>
+<li>执行-&gt;重新调度</li>
+</ol>
+<h2 id="三、进程同步"><a href="#三、进程同步" class="headerlink" title="三、进程同步"></a>三、进程同步</h2><p>并发执行的进程之间按照一定的顺序共享系统资源，使程序的执行具有可再现性</p>
+<p><strong>制约关系</strong></p>
+<ol>
+<li>互斥：资源共享，需要cpu调度</li>
+<li>合作：进程合作，不用cpu调度，你先我后，你放我取</li>
+</ol>
+<p><strong>临界资源</strong><br>需要互斥访问的，不可抢占的资源：打印机、文件、信号量等</p>
+<p><strong>同步机制遵循的规则</strong></p>
+<ol>
+<li>空间让进</li>
+<li>忙则等待</li>
+<li>有限等待</li>
+<li>让权等待</li>
+</ol>
+<h2 id="四、处理机调度"><a href="#四、处理机调度" class="headerlink" title="四、处理机调度"></a>四、处理机调度</h2><h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p>高级调度：作业调度（外存的后备队列-&gt;内存）<br>中级调度：内存调度（外存静止就绪态进程-&gt;内存就绪队列）<br>低级调度：进程调度（内存中就绪队列的一个进程-&gt;CPU）</p>
+<h3 id="作业调度"><a href="#作业调度" class="headerlink" title="作业调度"></a>作业调度</h3><ol>
+<li>先来先服务<br> 非抢占、有利于长作业、不利于短作业</li>
+<li>短作业优先<br>抢占（时间片），有利于短作业，有效降低作业平均等待时间，提高系统的吞吐量， 不利于长作业，必须预知作业的运行时间，未考虑作业的紧急程度</li>
+<li>高优先权优先算法<br>抢占：出现了高优先权作业，让出处理机<br>非抢占：一旦执行就完成<br>确定优先权：<ol>
+<li>系统进程 &gt; 用户进程</li>
+<li>资源要求少优先权高</li>
+<li>用户要求</li>
+</ol>
+</li>
+<li>高响应比优先<br> 非抢占：作业完成，进行响应比的比较<br> 可以转化成短作业优先，先来先服务。<br> 对于长作业，等待时间长，总会得到处理机。</li>
+</ol>
+<h3 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h3><ol>
+<li>时间片轮转</li>
+<li>多级反馈队列<ol>
+<li>设置多个就绪队列，</li>
+<li>每个队列先来先服务</li>
+<li>按队列优先级调度，第一队列空闲才调度第二队列</li>
+</ol>
+</li>
+</ol>
+<h3 id="实时调度算法"><a href="#实时调度算法" class="headerlink" title="实时调度算法"></a>实时调度算法</h3><ol>
+<li>最早截止时间优先</li>
+<li>最低松弛度优先</li>
+</ol>
+<h2 id="五、死锁"><a href="#五、死锁" class="headerlink" title="五、死锁"></a>五、死锁</h2><h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><ol>
+<li>可重用性资源：永久性资源</li>
+<li>可消耗性资源：临界性资源</li>
+<li>可抢占性资源：CPU、主存</li>
+<li>不可抢占性资源：打印机，磁带机</li>
+</ol>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol>
+<li>竞争资源</li>
+<li>进程推进顺序不当</li>
+</ol>
+<h3 id="四个必要条件"><a href="#四个必要条件" class="headerlink" title="四个必要条件"></a>四个必要条件</h3><ol>
+<li>互斥</li>
+<li>请求和保持条件</li>
+<li>不可抢占</li>
+<li>循环等待</li>
+</ol>
+<h3 id="处理死锁的方法"><a href="#处理死锁的方法" class="headerlink" title="处理死锁的方法"></a>处理死锁的方法</h3><ol>
+<li>预防：破坏必要条件<ol>
+<li>破坏请求和保持条件：使用AND型信号量</li>
+<li>破坏不可抢占：不运行，就主动释放</li>
+<li>破坏环路等待：进程编号，智能小号进程申请大号进程资源。</li>
+</ol>
+</li>
+<li>避免：资源分配过程，防止进入<ol>
+<li>银行家算法</li>
+</ol>
+</li>
+<li>检测：资源分配图</li>
+<li>解除：剥夺资源、撤销进程。</li>
+</ol>
+<h2 id="六、内存管理：连续分配"><a href="#六、内存管理：连续分配" class="headerlink" title="六、内存管理：连续分配"></a>六、内存管理：连续分配</h2><h3 id="多级存储器结构"><a href="#多级存储器结构" class="headerlink" title="多级存储器结构"></a>多级存储器结构</h3><ol>
+<li>CPU寄存器</li>
+<li>主存：cache、主存、磁盘缓存</li>
+<li>辅存；磁盘</li>
+</ol>
+<h3 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h3><p>.c .o .exe 装入 执行<br><strong>装入</strong><br>绝对装入：装入内存，程序的逻辑地址即物理地址。<br>可重定位装入方式：逻辑地址到物理地址的变换，在装入时一次性完成，在内存中无法改变。<br>动态运行时装入：重定位寄存器。<br><strong>链接</strong></p>
+<ol>
+<li>静态链接</li>
+<li>装入时动态链接</li>
+<li>运行时动态链接</li>
+</ol>
+<h3 id="连续分配方式"><a href="#连续分配方式" class="headerlink" title="连续分配方式"></a>连续分配方式</h3><ol>
+<li><strong>单一连续分配</strong><br>原理：把所有用户区分配给一个作业</li>
+<li><strong>固定分区分配</strong><br>原理：用户划分成若干个大小相等或不相等的分区。<br>缺点：产生大量内碎片。</li>
+<li><strong>动态分区分配</strong><br>原理：事先不分配，作业来了，是多大分配多大。</li>
+<li><strong>可重定位分配</strong></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>朝霞换夕阳</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://blog.mornw.com/2022/03/02/%E5%AD%A6%E4%B9%A0/os/">http://blog.mornw.com/2022/03/02/%E5%AD%A6%E4%B9%A0/os/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"># 操作系统</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/">TPM 原理</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 朝霞换夕阳 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
