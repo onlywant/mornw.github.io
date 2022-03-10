@@ -225,22 +225,22 @@
             <h1 id="Part-I-编译内存相关"><a href="#Part-I-编译内存相关" class="headerlink" title="Part I 编译内存相关"></a>Part I 编译内存相关</h1><h2 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h2><blockquote>
 <p>编译分为四个过程：预处理（#）、编译、汇编、链接。</p>
 </blockquote>
-<p>链接：静态链接、动态链接</p>
+<p><strong>静态链接</strong>：在链接阶段将库的内容导入到可执行程序中。<br><strong>动态链接</strong>：在程序运行时，由操作系统的装载程序加载库。</p>
 <hr>
-<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p><strong>栈</strong>：存放函数的局部变量、函数参数、返回地址等，由编译器自动分配和释放<br><strong>堆</strong>：存放动态申请的空间，有程序员控制分配和释放，如果程序执行结束还没释放，操作系统会自动回收。<br>**全局区&#x2F;静态存储区 (.bss .data)**：存放常量，不允许修改，程序运行结束自动释放。<br>**代码区 (.text)**：存放代码，不允许修改，但可以执行。</p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p><strong>栈</strong>：存放函数的局部变量、函数参数、返回地址等，由编译器自动分配和释放<br><strong>堆</strong>：存放动态申请的空间，由程序员控制分配和释放，如果程序执行结束还没释放，操作系统会自动回收。<br>**全局区&#x2F;静态存储区 (.bss .data)**：存放常量，不允许修改，程序运行结束自动释放。<br>**代码区 (.text)**：存放代码，不允许修改，但可以执行。</p>
 <hr>
 <h2 id="栈和堆的区别"><a href="#栈和堆的区别" class="headerlink" title="栈和堆的区别"></a>栈和堆的区别</h2><ol>
 <li><strong>申请方式</strong>：操作系统、程序员</li>
 <li><strong>内存空间</strong>：连续、不连续</li>
 <li><strong>申请效率</strong>：高，低</li>
-<li><strong>存放内容</strong>：局部变量、有程序员控制</li>
+<li><strong>存放内容</strong>：局部变量、由程序员控制</li>
 </ol>
 <hr>
 <h2 id="变量的区别"><a href="#变量的区别" class="headerlink" title="变量的区别"></a>变量的区别</h2><ol>
 <li><strong>全局变量</strong>：全局作用域。只需要在一个源文件中定义，就可以作用于所有源文件，但是，在其他源文件中使用时，需要使用<code>extern</code>关键字声明</li>
 <li><strong>静态全局变量</strong>：文件作用域。即被 <code>static</code> 修饰的变量，只在该源文件内起作用。</li>
-<li><strong>局部变量</strong>：局部作用域。向循环内部声明的变量，代码块执行完成后撤销，内存被收回。</li>
-<li><strong>静态局部变量</strong>：局部作用域。只被初始化一次，从初始化到程序运行结束一直存在。只不过只被定义自己的函数体可见。</li>
+<li><strong>局部变量</strong>：局部作用域。像循环内部声明的变量，代码块执行完成后撤销，内存被收回。</li>
+<li><strong>静态局部变量</strong>：局部作用域。只被初始化一次，从初始化到程序运行结束一直存在。只被定义自己的函数体可见。</li>
 </ol>
 <hr>
 <h2 id="字和字节"><a href="#字和字节" class="headerlink" title="字和字节"></a>字和字节</h2><blockquote>
@@ -248,24 +248,36 @@
 </blockquote>
 <hr>
 <h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><ol>
-<li><strong>是什么</strong>：编译器把程序中的“数据单元”安排在字的整数倍的地址指向的内存之中。</li>
-<li><strong>为什么</strong>：平台原因（便于移植）、性能原因。</li>
-<li><strong>原则</strong>：<ul>
+<li><p><strong>有效对齐值</strong>：字的大小（操作系统数据处理的运算单位）</p>
+</li>
+<li><p><strong>是什么</strong>：编译器把程序中的“数据单元”安排在字的整数倍的地址指向的内存之中。</p>
+</li>
+<li><p><strong>为什么</strong>：</p>
+<ol>
+<li>平台原因（便于移植）</li>
+<li>性能原因</li>
+</ol>
+</li>
+<li><p><strong>原则</strong>：</p>
+<ul>
 <li>基本类型的对齐值就是其sizeof的值。</li>
-<li>结构体第一个成员变量的偏移量为0， 以后每个成员<strong>相对于结构体首地址</strong>的offset都是<strong>该成员大小与有效对齐值中较小那个</strong>的整数倍。（有效对齐值：字的大小（操作系统数据处理的运算单位））</li>
+<li>结构体第一个成员变量的偏移量为0， 以后每个成员<strong>相对于结构体首地址</strong>的offset都是<strong>该成员大小与有效对齐值中较小那个</strong>的整数倍。</li>
 <li>结构体的总大小为<strong>有效对齐值</strong>的整数倍，如果不够，则在最末一个成员之后填充字节。</li>
 </ul>
 </li>
 </ol>
 <hr>
 <h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><blockquote>
-<p>由于疏忽或者错误导致的程序未能释放已经不再使用的内存。<br>    - 常指堆内存泄露<br>    - 指针重新赋值，导致空间无法找到。</p>
+<p>由于疏忽或者错误导致的程序未能释放已经不再使用的内存。</p>
 </blockquote>
-<h3 id="防止内存泄露"><a href="#防止内存泄露" class="headerlink" title="防止内存泄露"></a>防止内存泄露</h3><blockquote>
-</blockquote>
-<pre><code>1. 内部封装：将内存的分配和释放封装到类中，构造的时候申请内存，析构的时候释放内存。
-2. 智能指针：我们虽然可以在每次 new 完一个对象后，写出对应的 delete ，但我们不能保证在调用 delete 之前，程序不会发生错误或者提前返回。智能指针是一个类，当超出类的作用域的时候，类会自动调用析构函数，析构函数会自动释放资源。
-</code></pre>
+<ul>
+<li>常指堆内存泄露</li>
+<li>指针重新赋值，导致空间无法找到。</li>
+</ul>
+<h3 id="防止内存泄露"><a href="#防止内存泄露" class="headerlink" title="防止内存泄露"></a>防止内存泄露</h3><ol>
+<li><strong>内部封装</strong>：将内存的分配和释放封装到类中，构造的时候申请内存，析构的时候释放内存。</li>
+<li><strong>智能指针</strong>：我们虽然可以在每次 new 完一个对象后，写出对应的 delete ，但我们不能保证在调用 delete 之前，程序不会发生错误或者提前返回。————智能指针是一个类，当超出类的作用域的时候，类会自动调用析构函数，析构函数会自动释放资源。</li>
+</ol>
 <hr>
 <h2 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h2><p><strong>浅拷贝</strong>：位拷贝，把对象里的值完全复制给另一个对象，如A&#x3D;B。如果B中有一个成员变量指针已经申请了内存，那A中的成员变量也指向同一块内存。这就会出问题：假如B把内存释放了，这时A内的指针就是野指针了，出现运行错误。</p>
 <p><strong>深拷贝</strong>：资源重新分配。 </p>
@@ -284,6 +296,7 @@
 <li>成员函数的返回值和形参</li>
 <li>成员函数的函数体</li>
 </ol>
+<h3 id="编译时函数名"><a href="#编译时函数名" class="headerlink" title="编译时函数名"></a>编译时函数名</h3><p>类或命名空间中的变量或函数：<br>各个空间和类的名字，每个名字前是名的字符长度，然后是变量&#x2F;函数名的长度和变量&#x2F;函数名，后面紧跟”E”，然后如果是函数则跟参数别名，如果是变量则什么都不用加。<br>如：<br>mangling::C1::C2::func(int)<br>_ZN8mangling2C12C24funcEi</p>
 <hr>
 <h1 id="Part-II-语言对比"><a href="#Part-II-语言对比" class="headerlink" title="Part II 语言对比"></a>Part II 语言对比</h1><h2 id="C-11-新特性"><a href="#C-11-新特性" class="headerlink" title="C++ 11 新特性"></a>C++ 11 新特性</h2><ol>
 <li><p><code>auto</code> 类型推导。编译器会在 <strong>编译期间</strong> 通过初始值推到出变量的类型。</p>
@@ -305,13 +318,34 @@
 <p> 绑定到右值的引用，用<code>&amp;&amp;</code>来获得右值引用，右值引用智能绑定到要销毁的对象<br> <strong>左值</strong>：可以取地址的，有名字的，非临时的<br> <strong>右值</strong>：不能取地址，没有名字，临时的。立即数 -&gt; 右值。</p>
 <p> <strong>左值和右值引用本质区别</strong>：</p>
 <blockquote>
-<p>创建和销毁由编译器幕后控制，程序员智能确保在本行代码有效的，就是右值；而由用户创建的，通过作用域规则可知其生存期的，就是左值。</p>
+<p>创建和销毁由编译器幕后控制，程序员只能确保在本行代码有效的，就是右值；而由用户创建的，通过作用域规则可知其生存期的，就是左值。</p>
 </blockquote>
-</li>
-<li><p><code>move()</code> 函数，可获得绑定到做纸上的右值引用。</p>
+<p> <strong>移动语义：</strong> </p>
+<blockquote>
+<p>为了解决进行大数据复制的时候，进行大量的数据拷贝问题<br>转移资源所有权，类似于转让或者资源窃取，对于那个资源，转为自己所有，别人不再拥有也不会再使用。</p>
+</blockquote>
+<p> <strong>移动构造函数：</strong></p>
+<blockquote>
+<p><strong>std::move的本质</strong>，就是一个转换函数，将给定的类型转化为右值引用，而并不是真正地“移动”了资源</p>
+</blockquote>
+<p> <strong>完美转发：</strong> </p>
+<blockquote>
+<p>可以写一个接受任意实参的函数模板，并转发到其他函数，目标函数会受到与转发函数完全相同的实参</p>
+</blockquote>
 </li>
 <li><p><code>delete</code> ：<code>= delete</code> 表示该函数不能被调用。<br><code>default</code>：<code>= default</code> 表示编译器生成默认的函数。</p>
 </li>
+<li><p>列表初始化<br>C++11中可以直接在变量名后加上初始化列表进行对象的初始化。</p>
+</li>
+<li><p>智能指针<br>引入了智能指针的概念，方便管理堆内存，使得自动、异常安全的对象生存期管理可行。解决内存泄露问题，构造函数不能被隐式调用。<br> shared_ptr</p>
+<p> weak_ptr</p>
+<p> unique_ptr</p>
+</li>
+<li><p>constexpr：编译时的常量和常量函数</p>
+<blockquote>
+<p>与const区别：<br>两者都代表可读，const只表示read only的语义，只保证了运行时不可以被修改，但它修饰的仍然有可能是个动态变量，而constexpr修饰的才是真正的常量，它会在编译期间就会被计算出来，整个运行过程中都不可以被改变，<strong>constexpr可以用于修饰函数，这个函数的返回值会尽可能在编译期间被计算出来当作一个常量，但是如果编译期间此函数不能被计算出来，那它就会当作一个普通函数被处理。</strong></p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">func</span>(i);<span class="comment">// 普通函数</span></span><br><span class="line">    <span class="built_in">func</span>(<span class="number">2</span>);<span class="comment">// 编译期间就会被计算出来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
 <h2 id="C-和-C-的区别"><a href="#C-和-C-的区别" class="headerlink" title="C 和 C++ 的区别"></a>C 和 C++ 的区别</h2><ol>
