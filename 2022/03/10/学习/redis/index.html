@@ -17,7 +17,7 @@
 
 
 
-<title>binary_search | 朝霞换夕阳</title>
+<title>redis | 朝霞换夕阳</title>
 
 
 
@@ -131,11 +131,73 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">binary_search</h1>
+            <h1 class="post-title">redis</h1>
             
                 <div class="post-meta">
                     
@@ -144,16 +206,23 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">二月 24, 2022&nbsp;&nbsp;10:15:18</a>
+                        Date: <a href="#">三月 10, 2022&nbsp;&nbsp;17:31:27</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/redis/">redis</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            
+            <h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1>
         </div>
 
         
@@ -167,7 +236,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://blog.mornw.com/2022/02/24/binary-search/">http://blog.mornw.com/2022/02/24/binary-search/</a></span>
+                        <span><a href="http://blog.mornw.com/2022/03/10/%E5%AD%A6%E4%B9%A0/redis/">http://blog.mornw.com/2022/03/10/%E5%AD%A6%E4%B9%A0/redis/</a></span>
                     </p>
                 
                 
@@ -190,6 +259,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/redis/"># redis</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -200,10 +273,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/">TPM 原理</a>
             
-            
-            <a class="next" rel="next" href="/2022/02/20/%E5%AD%A6%E4%B9%A0/java/">Java复习</a>
+            <a class="next" rel="next" href="/2022/03/10/%E5%AD%A6%E4%B9%A0/consistent-proxy/">一致性协议</a>
             
         </section>
 
