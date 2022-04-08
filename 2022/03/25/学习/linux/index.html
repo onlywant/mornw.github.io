@@ -17,7 +17,7 @@
 
 
 
-<title>大数据相关 | 朝霞换夕阳</title>
+<title>linux 三剑客 | 朝霞换夕阳</title>
 
 
 
@@ -194,7 +194,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">大数据相关</h1>
+            <h1 class="post-title">linux 三剑客</h1>
             
                 <div class="post-meta">
                     
@@ -203,14 +203,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">二月 4, 2022&nbsp;&nbsp;9:27:58</a>
+                        Date: <a href="#">三月 25, 2022&nbsp;&nbsp;18:51:07</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                                <a href="/categories/linux/">linux</a>
                             
                         </span>
                     
@@ -219,19 +219,24 @@
         </header>
 
         <div class="post-content">
-            <span id="more"></span>
+            <h1 id="linux-三剑客"><a href="#linux-三剑客" class="headerlink" title="linux 三剑客"></a>linux 三剑客</h1><h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>作用：查找文件内容</p>
+<p>-c 列出包含模式的行数<br>-n 在每一行的最前面列出行号</p>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>作用：流编辑模式，根据脚本命令来处理文本文件中的数据。</p>
+<p>流程：</p>
+<ol>
+<li>每次仅读取一行内容</li>
+<li>根据提供的规则命令匹配并修改数据。修改缓冲区的数据，不会修改源文件</li>
+<li>将执行结果输出</li>
+<li>循环知道处理完毕</li>
+</ol>
+<p>选项：<br>-e 脚本命令<br>-f 脚本命令文件<br>-n 屏蔽输出，需要print来完成输出</p>
+<p>‘s’ 替换<br>‘d’ 删除<br>‘i’ 增加<br>‘a’<br>‘c’ 替换行<br>‘y’<br>‘w’ 写入<br>‘r’ 插入其他数据流<br>‘q’ 第一次匹配后退出</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>作用：逐行扫描文件，寻找含有目标的行</p>
+<p>‘匹配规则{执行命令}’</p>
+<p><code>awk &#39;/^$/ &#123;print &quot;Blank line&quot;&#125;&#39; test.txt</code><br>匹配空白行，输出。</p>
+<p>数据字段变量<br>$0 代表整个文本行<br>$1 代表文本行中的第1个数据字段<br>$n 代表第n个数据字段</p>
+<p>使用分号可以多个命令<br><code># echo &quot;My name is Rich&quot; | awk &#39;&#123;$4=&quot;Christine&quot;; print $0&#125;&#39;</code><br><code>My name is Christine</code></p>
 
-<h1 id="Map-Reduce"><a href="#Map-Reduce" class="headerlink" title="Map-Reduce"></a>Map-Reduce</h1><p>我们要数图书馆中的所有书。你数1号书架，我数2号书架。这就是“Map”。我们人越多，数书就更快。</p>
-<p>现在我们到一起，把所有人的统计数加在一起。这就是“Reduce”。</p>
-<hr>
-<h1 id="spark-和-hadoop区别"><a href="#spark-和-hadoop区别" class="headerlink" title="spark 和 hadoop区别"></a>spark 和 hadoop区别</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p><em>hadoop</em> 是一个分布式数据基础设施。作用：用来存储</p>
-<p><em>spark</em> 是处理数据的工具。作用：用来计算</p>
-<h2 id="数据处理方式"><a href="#数据处理方式" class="headerlink" title="数据处理方式"></a>数据处理方式</h2><p>spark 比 hadoop MapReduce快很多</p>
-<p><em>hadoop</em> 分布处理：读取-&gt;处理-&gt;存储-&gt;读取-&gt;处理-&gt;……</p>
-<p><em>spark</em> 集中处理：读取-&gt;完成所有处理任务-&gt;存储</p>
-<hr>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="一、如何给20G大小的文件，每一行是一个数字进行排序？"><a href="#一、如何给20G大小的文件，每一行是一个数字进行排序？" class="headerlink" title="一、如何给20G大小的文件，每一行是一个数字进行排序？"></a>一、如何给20G大小的文件，每一行是一个数字进行排序？</h2><p>K-归并。（Map-Reduce应用）</p>
-<h2 id="二、分布式-ID-生成"><a href="#二、分布式-ID-生成" class="headerlink" title="二、分布式 ID 生成"></a>二、分布式 ID 生成</h2>
         </div>
 
         
@@ -245,7 +250,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://blog.mornw.com/2022/02/04/%E5%AD%A6%E4%B9%A0/big_data/">http://blog.mornw.com/2022/02/04/%E5%AD%A6%E4%B9%A0/big_data/</a></span>
+                        <span><a href="http://blog.mornw.com/2022/03/25/%E5%AD%A6%E4%B9%A0/linux/">http://blog.mornw.com/2022/03/25/%E5%AD%A6%E4%B9%A0/linux/</a></span>
                     </p>
                 
                 
@@ -269,7 +274,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"># 大数据</a>
+                        <a href="/tags/linux/"># linux</a>
                     
                         
                 </span>
@@ -282,10 +287,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/02/11/%E7%94%9F%E6%B4%BB/emotional/">树洞</a>
             
-            
-            <a class="next" rel="next" href="/2022/02/04/%E7%94%9F%E6%B4%BB/workflowy/">每日小计划</a>
+            <a class="next" rel="next" href="/2022/03/24/%E5%AD%A6%E4%B9%A0/leetcode/">leetcode</a>
             
         </section>
 

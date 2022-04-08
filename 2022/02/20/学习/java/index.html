@@ -142,45 +142,34 @@
 </div>
 
 <script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
 
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
     }
 
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expandToc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
     }
 
     function go_top() {
@@ -191,6 +180,14 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
 </script>
     
 
@@ -222,7 +219,21 @@
         </header>
 
         <div class="post-content">
-            <h1 id="java-复习"><a href="#java-复习" class="headerlink" title="java 复习"></a>java 复习</h1><h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fnlingnzb-learner/p/11990943.html">类加载</a></h2><p>类从被加载到虚拟机内存中开始，直到卸载出内存为止，它的整个生命周期包括了：<strong>加载、验证、准备、解析、初始化、使用和卸载</strong>这7个阶段。其中，<strong>验证、准备和解析</strong>这三个部分统称为连接（Linking）。</p>
+            <h1 id="java-复习"><a href="#java-复习" class="headerlink" title="java 复习"></a>java 复习</h1><h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ol>
+<li>类加载子系统</li>
+<li>执行引擎</li>
+<li>本地接口</li>
+<li>运行时数据区：方法区、堆、栈、程序计数器</li>
+</ol>
+<h3 id="堆栈的区别"><a href="#堆栈的区别" class="headerlink" title="堆栈的区别"></a>堆栈的区别</h3><p>物理地址是否连续，内存分配，大小</p>
+<h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>长生命周期的对象持有短生命周期对象的引用</p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><ol>
+<li>分代复制垃圾回收</li>
+<li>标记垃圾回收</li>
+<li>增量垃圾回收</li>
+</ol>
+<p>判断方法：引用计数、可达性分析，从根（栈上的变量）开始向下搜索。</p>
+<h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fnlingnzb-learner/p/11990943.html">类加载</a></h2><p>类从被加载到虚拟机内存中开始，直到卸载出内存为止，它的整个生命周期包括了：<strong>加载、验证、准备、解析、初始化、使用和卸载</strong>这7个阶段。其中，<strong>验证、准备和解析</strong>这三个部分统称为连接（Linking）。</p>
 <h3 id="何时开始类的初始化。"><a href="#何时开始类的初始化。" class="headerlink" title="何时开始类的初始化。"></a>何时开始类的初始化。</h3><p>什么情况下需要开始类加载过程的第一个阶段：“<strong>加载</strong>”。虚拟机规范中并没强行约束，这点可以交给虚拟机的的具体实现自由把握，但是<strong>对于初始化阶段虚拟机规范是严格规定了如下几种情况</strong>，如果类未初始化会对类进行初始化。</p>
 <ol>
 <li>创建类的实例</li>

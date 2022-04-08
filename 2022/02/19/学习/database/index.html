@@ -142,45 +142,34 @@
 </div>
 
 <script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
 
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
     }
 
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expandToc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
     }
 
     function go_top() {
@@ -191,6 +180,14 @@
         window.scrollTo(0, document.body.scrollHeight);
     }
 
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
 </script>
     
 
@@ -227,7 +224,7 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/181498475">LSM 树</a></p>
 <h1 id="数据库复习"><a href="#数据库复习" class="headerlink" title="数据库复习"></a>数据库复习</h1><h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><p>数据库的目录。相当于字典上的字母目录。<br><strong>优点：</strong> 查的快<br><strong>缺点：</strong> 增删改慢，同步维护索引<br><strong>结构：</strong> B+树</p>
 <h3 id="什么是聚簇索引"><a href="#什么是聚簇索引" class="headerlink" title="什么是聚簇索引"></a>什么是聚簇索引</h3><p>是一种存储方式，将数据存储和索引放到一起，找到索引就找到了数据。</p>
-<h2 id="二、事务"><a href="#二、事务" class="headerlink" title="二、事务"></a>二、事务</h2><p>sql是先写日志，再写数据库。<br>如果没有提交，断电，自动回滚。<br>事务已经提交，断电，根据日志继续执行。<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/leetbook/read/database-handbook/px8dnd/">参考</a></p>
+<h3 id="什么是非聚簇索引"><a href="#什么是非聚簇索引" class="headerlink" title="什么是非聚簇索引"></a>什么是非聚簇索引</h3><h2 id="二、事务"><a href="#二、事务" class="headerlink" title="二、事务"></a>二、事务</h2><p>sql是先写日志，再写数据库。<br>如果没有提交，断电，自动回滚。<br>事务已经提交，断电，根据日志继续执行。<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/leetbook/read/database-handbook/px8dnd/">参考</a></p>
 <h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><p><strong>Buffer Pool</strong>：大大提高了读写数据的效率，但是也带了新的问题：如果MySQL宕机，而此时Buffer Pool中修改的数据还没有刷新到磁盘，就会导致数据的丢失，事务的持久性无法保证。<br><strong>redo log</strong>：当数据修改时，除了修改Buffer Pool中的数据，还会在redo log记录这次操作；当事务提交时，会调用fsync接口对redo log进行刷盘。如果MySQL宕机，重启时可以读取redo log中的数据，对数据库进行恢复。redo log采用的是WAL（Write-ahead logging，预写式日志），所有修改先写入日志，再更新到Buffer Pool，保证了数据不会因MySQL宕机而丢失，从而满足了持久性要求。<br>刷脏是随机IO，因为每次修改的数据位置随机，但写redo log是追加操作，属于顺序IO。</p>
 <p><strong>binlog</strong>：binlog是用于point-in-time recovery的，保证服务器可以基于时间点恢复数据，此外binlog还用于主从复制。binlog的内容是二进制的，根据binlog_format参数的不同，可能基于sql语句、基于数据本身或者二者的混合。</p>
 <p><strong>undo log</strong>：Undo log 主要用于记录数据被修改之前的日志，在表信息修改之前先会把逆操作记录到undo log 里，当事务进行回滚时可以通过undo log 里的日志进行数据还原。</p>
