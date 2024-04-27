@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>linux 三剑客</title>
+    <link href="/2022/03/25/%E5%AD%A6%E4%B9%A0/linux/"/>
+    <url>/2022/03/25/%E5%AD%A6%E4%B9%A0/linux/</url>
+    
+    <content type="html"><![CDATA[<h1 id="linux-三剑客"><a href="#linux-三剑客" class="headerlink" title="linux 三剑客"></a>linux 三剑客</h1><h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>作用：查找文件内容</p><p>-c 列出包含模式的行数<br>-n 在每一行的最前面列出行号</p><h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>作用：流编辑模式，根据脚本命令来处理文本文件中的数据。</p><p>流程：</p><ol><li>每次仅读取一行内容</li><li>根据提供的规则命令匹配并修改数据。修改缓冲区的数据，不会修改源文件</li><li>将执行结果输出</li><li>循环知道处理完毕</li></ol><p>选项：<br>-e 脚本命令<br>-f 脚本命令文件<br>-n 屏蔽输出，需要print来完成输出</p><p>‘s’ 替换<br>‘d’ 删除<br>‘i’ 增加<br>‘a’<br>‘c’ 替换行<br>‘y’<br>‘w’ 写入<br>‘r’ 插入其他数据流<br>‘q’ 第一次匹配后退出</p><h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>作用：逐行扫描文件，寻找含有目标的行</p><p>‘匹配规则{执行命令}’</p><p><code>awk &#39;/^$/ &#123;print &quot;Blank line&quot;&#125;&#39; test.txt</code><br>匹配空白行，输出。</p><p>数据字段变量<br>$0 代表整个文本行<br>$1 代表文本行中的第1个数据字段<br>$n 代表第n个数据字段</p><p>使用分号可以多个命令<br><code># echo &quot;My name is Rich&quot; | awk &#39;&#123;$4=&quot;Christine&quot;; print $0&#125;&#39;</code><br><code>My name is Christine</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>leetcode</title>
+    <link href="/2022/03/24/%E5%AD%A6%E4%B9%A0/leetcode/"/>
+    <url>/2022/03/24/%E5%AD%A6%E4%B9%A0/leetcode/</url>
+    
+    <content type="html"><![CDATA[<h1 id="leetcode备忘录"><a href="#leetcode备忘录" class="headerlink" title="leetcode备忘录"></a>leetcode备忘录</h1><h2 id="题：912-排序数组"><a href="#题：912-排序数组" class="headerlink" title="题：912 排序数组"></a>题：912 排序数组</h2><p>快速排序、堆排序</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 快速排序</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">sortArray</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-built_in">quickSort</span>(nums, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> nums;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (l &lt; r) &#123;<br>            <span class="hljs-keyword">int</span> j = <span class="hljs-built_in">patition</span>(nums, l, r);<br>            <span class="hljs-built_in">quickSort</span>(nums, l, j - <span class="hljs-number">1</span>);<br>            <span class="hljs-built_in">quickSort</span>(nums, j + <span class="hljs-number">1</span>, r);<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">patition</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> pivot = l + <span class="hljs-built_in">rand</span>() % (r - l + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">int</span> t = nums[pivot];<br>        <span class="hljs-built_in">swap</span>(nums[pivot], nums[l]);<br>        <span class="hljs-keyword">int</span> i = l, j = r;<br>        <span class="hljs-keyword">while</span> (i &lt; j) &#123;<br>            <span class="hljs-keyword">while</span> (j &gt; i &amp;&amp; nums[j] &gt;= t) j--;<br>            <span class="hljs-keyword">while</span> (i &lt; j &amp;&amp; nums[i] &lt;= t) ++i;<br>            <span class="hljs-keyword">if</span> (i &lt; j)  <span class="hljs-built_in">swap</span>(nums[i], nums[j]);<br>        &#125;<br>        <span class="hljs-built_in">swap</span>(nums[j], nums[l]);<br>        <span class="hljs-keyword">return</span> j;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 堆排序</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">sortArray</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n / <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;<br>            <span class="hljs-built_in">down_adjust</span>(nums, i, n);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;<br>            <span class="hljs-built_in">swap</span>(nums[i], nums[<span class="hljs-number">0</span>]);<br>            n--;<br>            <span class="hljs-built_in">down_adjust</span>(nums, <span class="hljs-number">0</span>, n);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) cout &lt;&lt; nums[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>        <span class="hljs-keyword">return</span> nums;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">down_adjust</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> idx, <span class="hljs-keyword">int</span> len)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> fa = idx;<br>        <span class="hljs-keyword">int</span> child = idx * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (child &lt; len) &#123;<br>            <span class="hljs-keyword">if</span> (child + <span class="hljs-number">1</span> &lt; len &amp;&amp; nums[child + <span class="hljs-number">1</span>] &gt; nums[child]) &#123;<br>                child = child + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (nums[fa] &lt; nums[child]) &#123;<br>                <span class="hljs-built_in">swap</span>(nums[fa], nums[child]);<br>            &#125;<br>            fa = child;<br>            child = fa * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>leetcode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>redis</title>
+    <link href="/2022/03/10/%E5%AD%A6%E4%B9%A0/redis/"/>
+    <url>/2022/03/10/%E5%AD%A6%E4%B9%A0/redis/</url>
+    
+    <content type="html"><![CDATA[<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>redis</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>redis</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>一致性协议</title>
+    <link href="/2022/03/10/%E5%AD%A6%E4%B9%A0/consistent-proxy/"/>
+    <url>/2022/03/10/%E5%AD%A6%E4%B9%A0/consistent-proxy/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/crazymakercircle/p/14334422.html">参考</a></p><h1 id="一致性协议"><a href="#一致性协议" class="headerlink" title="一致性协议"></a>一致性协议</h1><h2 id="一、2PC"><a href="#一、2PC" class="headerlink" title="一、2PC"></a>一、2PC</h2><p>二阶段提交，广泛应用在数据库领域，</p><h3 id="阶段一：提交事务请求"><a href="#阶段一：提交事务请求" class="headerlink" title="阶段一：提交事务请求"></a>阶段一：提交事务请求</h3><ol><li>事务询问，协调者向所有参与者发送事务内容，询问是否可以执行提交操作，并开始等待各参与者进行响应。</li><li>执行事务，各参与者，执行事务操作，将undo和redo操作记录本机日志</li><li>参与者返回结果，成功返回yes，否则返回no</li></ol><h3 id="阶段二：执行事务提交"><a href="#阶段二：执行事务提交" class="headerlink" title="阶段二：执行事务提交"></a>阶段二：执行事务提交</h3><p>所有参与者返回yes，则执行事务提交</p><ol><li>发送提交请求。</li><li>事务提交</li><li>返回提交结果</li><li>完成</li></ol><h3 id="中断事务"><a href="#中断事务" class="headerlink" title="中断事务"></a>中断事务</h3><p>如果出现意外，参与者返回no，或者等待超时，则会中断事务。</p><ol><li>发送回滚请求</li><li>回滚</li><li>返回回滚结果</li><li>中断事务</li></ol><h2 id="二、3PC"><a href="#二、3PC" class="headerlink" title="二、3PC"></a>二、3PC</h2><p>三阶段提交：cancommit、precommit、docommit。</p><h2 id="三、raft-协议"><a href="#三、raft-协议" class="headerlink" title="三、raft 协议"></a>三、raft 协议</h2><p>raft 是分布式一致复制协议。<br>角色：主节点、从结点、候选结点</p><ol><li>分布式系统刚开始，全部都是从节点，等待一个随机的竞选超时时间之后，没有收到leader发来的心跳包，就进入竞选阶段。假设A变成候选节点</li><li>结点A发送投票请求</li><li>有超过一般的节点回复，节点A从候选节点变为主节点。</li></ol><p><strong>日志复制</strong>：</p><ol><li>客户端的修改会被传入leader。未被提交，写入日志中。</li><li>leader把修改复制到所有follower</li><li>leader等大多数的follower修改后，才提交修改，</li><li>leader通知follower提交修改，此时所有节点的值达成一致。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>一致性协议</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>一致性协议</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>操作系统复习</title>
+    <link href="/2022/03/02/%E5%AD%A6%E4%B9%A0/os/"/>
+    <url>/2022/03/02/%E5%AD%A6%E4%B9%A0/os/</url>
+    
+    <content type="html"><![CDATA[<p>先把书读后，再把书读薄，再把书读没。</p><h1 id="操作系统复习"><a href="#操作系统复习" class="headerlink" title="操作系统复习"></a>操作系统复习</h1><p>操作系统是在应用和硬件之间的异层软件，对上层软件提供硬件抽象，对底层硬件进行管理。</p><p><a href="https://zhuanlan.zhihu.com/p/150676148">思维导图</a></p><h2 id="一、程序"><a href="#一、程序" class="headerlink" title="一、程序"></a>一、程序</h2><p>顺序执行：顺序性，封闭性（占全机资源）、可再现性<br>并发执行：间断性，失去封闭性，不可再现性</p><h2 id="二、进程"><a href="#二、进程" class="headerlink" title="二、进程"></a>二、进程</h2><h3 id="特征："><a href="#特征：" class="headerlink" title="特征："></a>特征：</h3><p>结构特征：进程 &#x3D; 程序 + 数据 + PCB<br>动态性：能创建和撤销，有生命周期<br>独立性：独立分配资源，独立运行，独立调度<br>并发性：<br>异步性：不可预知的速度推进</p><h3 id="PCB"><a href="#PCB" class="headerlink" title="PCB"></a>PCB</h3><p><strong>作用</strong>：使进程能够与其他进程并发执行<br><strong>信息</strong>：<br>    1. 进程标识符<br>    2. 处理机状态：寄存器<br>    3. 进程调度信息：进程状态，优先级，阻塞事件，进程调度算法所需信息。<br>    4. 进程控制信息：程序地址、进程同步和通信信息，资源清单，下一个PCB链接指针<br><strong>组织方式</strong>：<br>    1. 链式<br>    2. 线性<br>    3. 索引：</p><h3 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h3><ol><li>就绪</li><li>执行</li><li>阻塞</li></ol><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p><strong>事件</strong></p><ol><li>用户登陆</li><li>作业调度</li><li>提供服务：打印服务</li><li>应用请求</li></ol><p><strong>过程</strong></p><ol><li>申请空白PCB，从空闲队列索取一个不用的</li><li>为新进程分配资源，内存、文件、CPU等</li><li>初始化PCB</li><li>插入就绪队列</li></ol><h3 id="终止"><a href="#终止" class="headerlink" title="终止"></a>终止</h3><p><strong>事件</strong></p><ol><li>正常结束</li><li>异常结束</li><li>外界干预</li></ol><p><strong>过程</strong></p><ol><li>找到该进程PCB，读取状态，可能是阻塞、就绪、执行</li><li>如果是运行态，终止执行，</li><li>如果有子孙进程，终止执行</li><li>将全部资源回收父进程或系统</li><li>将PCB回收，挂到空闲队列</li></ol><h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><p><strong>事件</strong></p><ol><li>向系统请求共享资源失败</li><li>等待某种操作完成</li><li>等待新任务到达</li><li>等待新数据的到达</li></ol><p><strong>过程</strong></p><ol><li>阻塞原语 block 阻塞自己</li><li>PCB 状态改为阻塞</li><li>进入该事件的阻塞队列</li><li>调度程序重新调度</li></ol><h3 id="唤醒"><a href="#唤醒" class="headerlink" title="唤醒"></a>唤醒</h3><p><strong>过程</strong></p><ol><li>从阻塞队列移除</li><li>将PCB状态改为就绪</li><li>进入就绪队列</li></ol><h3 id="挂起和激活"><a href="#挂起和激活" class="headerlink" title="挂起和激活"></a>挂起和激活</h3><p><strong>挂起</strong>：</p><ol><li>活动就绪-&gt;静止就绪</li><li>活动阻塞-&gt;静止阻塞</li><li>执行-&gt;重新调度</li></ol><h2 id="三、进程同步"><a href="#三、进程同步" class="headerlink" title="三、进程同步"></a>三、进程同步</h2><p>并发执行的进程之间按照一定的顺序共享系统资源，使程序的执行具有可再现性</p><p><strong>制约关系</strong></p><ol><li>互斥：资源共享，需要cpu调度</li><li>合作：进程合作，不用cpu调度，你先我后，你放我取</li></ol><p><strong>临界资源</strong><br>需要互斥访问的，不可抢占的资源：打印机、文件、信号量等</p><p><strong>同步机制遵循的规则</strong></p><ol><li>空间让进</li><li>忙则等待</li><li>有限等待</li><li>让权等待</li></ol><h2 id="四、处理机调度"><a href="#四、处理机调度" class="headerlink" title="四、处理机调度"></a>四、处理机调度</h2><h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p>高级调度：作业调度（外存的后备队列-&gt;内存）<br>中级调度：内存调度（外存静止就绪态进程-&gt;内存就绪队列）<br>低级调度：进程调度（内存中就绪队列的一个进程-&gt;CPU）</p><h3 id="作业调度"><a href="#作业调度" class="headerlink" title="作业调度"></a>作业调度</h3><ol><li>先来先服务<br> 非抢占、有利于长作业、不利于短作业</li><li>短作业优先<br>抢占（时间片），有利于短作业，有效降低作业平均等待时间，提高系统的吞吐量， 不利于长作业，必须预知作业的运行时间，未考虑作业的紧急程度</li><li>高优先权优先算法<br>抢占：出现了高优先权作业，让出处理机<br>非抢占：一旦执行就完成<br>确定优先权：<ol><li>系统进程 &gt; 用户进程</li><li>资源要求少优先权高</li><li>用户要求</li></ol></li><li>高响应比优先<br> 非抢占：作业完成，进行响应比的比较<br> 可以转化成短作业优先，先来先服务。<br> 对于长作业，等待时间长，总会得到处理机。</li></ol><h3 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h3><ol><li>时间片轮转</li><li>多级反馈队列<ol><li>设置多个就绪队列，</li><li>每个队列先来先服务</li><li>按队列优先级调度，第一队列空闲才调度第二队列</li></ol></li></ol><h3 id="实时调度算法"><a href="#实时调度算法" class="headerlink" title="实时调度算法"></a>实时调度算法</h3><ol><li>最早截止时间优先</li><li>最低松弛度优先</li></ol><h2 id="五、死锁"><a href="#五、死锁" class="headerlink" title="五、死锁"></a>五、死锁</h2><h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><ol><li>可重用性资源：永久性资源</li><li>可消耗性资源：临界性资源</li><li>可抢占性资源：CPU、主存</li><li>不可抢占性资源：打印机，磁带机</li></ol><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol><li>竞争资源</li><li>进程推进顺序不当</li></ol><h3 id="四个必要条件"><a href="#四个必要条件" class="headerlink" title="四个必要条件"></a>四个必要条件</h3><ol><li>互斥</li><li>请求和保持条件</li><li>不可抢占</li><li>循环等待</li></ol><h3 id="处理死锁的方法"><a href="#处理死锁的方法" class="headerlink" title="处理死锁的方法"></a>处理死锁的方法</h3><ol><li>预防：破坏必要条件<ol><li>破坏请求和保持条件：使用AND型信号量</li><li>破坏不可抢占：不运行，就主动释放</li><li>破坏环路等待：进程编号，智能小号进程申请大号进程资源。</li></ol></li><li>避免：资源分配过程，防止进入<ol><li>银行家算法</li></ol></li><li>检测：资源分配图</li><li>解除：剥夺资源、撤销进程。</li></ol><h2 id="六、内存管理：连续分配"><a href="#六、内存管理：连续分配" class="headerlink" title="六、内存管理：连续分配"></a>六、内存管理：连续分配</h2><h3 id="多级存储器结构"><a href="#多级存储器结构" class="headerlink" title="多级存储器结构"></a>多级存储器结构</h3><ol><li>CPU寄存器</li><li>主存：cache、主存、磁盘缓存</li><li>辅存；磁盘</li></ol><h3 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h3><p>.c .o .exe 装入 执行<br><strong>装入</strong><br>绝对装入：装入内存，程序的逻辑地址即物理地址。<br>可重定位装入方式：逻辑地址到物理地址的变换，在装入时一次性完成，在内存中无法改变。<br>动态运行时装入：重定位寄存器。<br><strong>链接</strong></p><ol><li>静态链接</li><li>装入时动态链接</li><li>运行时动态链接</li></ol><h3 id="连续分配方式"><a href="#连续分配方式" class="headerlink" title="连续分配方式"></a>连续分配方式</h3><ol><li><strong>单一连续分配</strong><br>原理：把所有用户区分配给一个作业</li><li><strong>固定分区分配</strong><br>原理：用户划分成若干个大小相等或不相等的分区。<br>缺点：产生大量内碎片。</li><li><strong>动态分区分配</strong><br>原理：事先不分配，作业来了，是多大分配多大。</li><li><strong>可重定位分配</strong></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>操作系统</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>操作系统</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TPM 原理</title>
+    <link href="/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/"/>
+    <url>/2022/03/01/%E5%AD%A6%E4%B9%A0/tpm/</url>
+    
+    <content type="html"><![CDATA[<h1 id="TPM-原理"><a href="#TPM-原理" class="headerlink" title="TPM 原理"></a>TPM 原理</h1><h2 id="TPM-构成"><a href="#TPM-构成" class="headerlink" title="TPM 构成"></a>TPM 构成</h2><p><strong>逻辑功能</strong></p><ol><li>密码学系统。实现数据加密、数字签名、密码杂凑和随机数生成的各类密码算法的计算引擎，不对外提供接口的内部功能模块。</li><li>平台数据保护。对外提供秘钥管理和各类数据机密性、完整性保护功能，是直接体现密码学系统的功能类别。<strong>依赖该功能的秘钥管理和密码学计算器</strong>。</li><li>身份标识功能。对外提供身份标识秘钥的申请与管理，<strong>远程证明的基础</strong>。</li><li>完整性存储和报告。对外提供完整性值存储和签署功能，直接体现“可信性”。<strong>依赖该功能可以构建平台内部的信任链，还可以向外部实体进行远程证明</strong></li></ol><p><strong>硬件构成</strong>：</p><ol><li>密码引擎</li><li>电源</li><li>时钟</li><li>存储器</li></ol><h2 id="秘钥类型"><a href="#秘钥类型" class="headerlink" title="秘钥类型"></a>秘钥类型</h2><ol><li>身份秘钥：根秘钥，标识 TPM 和计算平台的身份，用于引证完整性报告</li><li>绑定秘钥：用于数据的加密和解密</li><li>签名秘钥：用于对用户选定的数据进行签名，也可用于引证平台完整性</li></ol><h2 id="TPM-完整性存储与报告"><a href="#TPM-完整性存储与报告" class="headerlink" title="TPM 完整性存储与报告"></a>TPM 完整性存储与报告</h2><h3 id="完整性度量"><a href="#完整性度量" class="headerlink" title="完整性度量"></a>完整性度量</h3><p>BIOS-&gt;BOOTLOADER-&gt;OS Kernel 逐级度量。度量<strong>代码的密码杂凑值（表征完整性）</strong>，将度量结果放在：<strong>平台配置寄存器（PCR）中</strong></p><p>PCR 值以扩展的方式更改：**新PCR &#x3D; Hash(原PCR值 || 扩展值)**，具有顺序性和单向性。</p><h3 id="远程证明"><a href="#远程证明" class="headerlink" title="远程证明"></a>远程证明</h3><p><strong>证明方</strong>：将所有被度量的软硬件信息发送给挑战方，包括完整性hash值。<br><strong>挑战方</strong>：根据证明方提供的软硬件信息列表，<strong>自行获取软硬件的标准完整性值，并计算PCR的扩展结果</strong>。最后验证是否一致。</p><h2 id="动态可信度量根"><a href="#动态可信度量根" class="headerlink" title="动态可信度量根"></a>动态可信度量根</h2><p>DRTM 可以在平台启动后任意时刻触发，能够基于硬件和程序代码简历一个隔离的安全可执行环境。<br><strong>基于CPU指令</strong>，将用户代码加载到SLB（secure loader block）内存区间，能够提供硬件级的DMA保护。</p><p>动态可信链：根据安全指令</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>可信计算</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>可信计算</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>binary_search</title>
+    <link href="/2022/02/24/%E5%AD%A6%E4%B9%A0/binary-search/"/>
+    <url>/2022/02/24/%E5%AD%A6%E4%B9%A0/binary-search/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Java复习</title>
+    <link href="/2022/02/20/%E5%AD%A6%E4%B9%A0/java/"/>
+    <url>/2022/02/20/%E5%AD%A6%E4%B9%A0/java/</url>
+    
+    <content type="html"><![CDATA[<h1 id="java-复习"><a href="#java-复习" class="headerlink" title="java 复习"></a>java 复习</h1><h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ol><li>类加载子系统</li><li>执行引擎</li><li>本地接口</li><li>运行时数据区：方法区、堆、栈、程序计数器</li></ol><h3 id="堆栈的区别"><a href="#堆栈的区别" class="headerlink" title="堆栈的区别"></a>堆栈的区别</h3><p>物理地址是否连续，内存分配，大小</p><h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>长生命周期的对象持有短生命周期对象的引用</p><h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><ol><li>分代复制垃圾回收</li><li>标记垃圾回收</li><li>增量垃圾回收</li></ol><p>判断方法：引用计数、可达性分析，从根（栈上的变量）开始向下搜索。</p><h2 id="类加载"><a href="#类加载" class="headerlink" title="类加载"></a><a href="https://www.cnblogs.com/fnlingnzb-learner/p/11990943.html">类加载</a></h2><p>类从被加载到虚拟机内存中开始，直到卸载出内存为止，它的整个生命周期包括了：<strong>加载、验证、准备、解析、初始化、使用和卸载</strong>这7个阶段。其中，<strong>验证、准备和解析</strong>这三个部分统称为连接（Linking）。</p><h3 id="何时开始类的初始化。"><a href="#何时开始类的初始化。" class="headerlink" title="何时开始类的初始化。"></a>何时开始类的初始化。</h3><p>什么情况下需要开始类加载过程的第一个阶段：“<strong>加载</strong>”。虚拟机规范中并没强行约束，这点可以交给虚拟机的的具体实现自由把握，但是<strong>对于初始化阶段虚拟机规范是严格规定了如下几种情况</strong>，如果类未初始化会对类进行初始化。</p><ol><li>创建类的实例</li><li>访问类的静态变量</li><li>访问类的静态方法</li><li>反射</li><li>当初始化一个类时，发现其父类还未初始化，则先触发父类的初始化</li><li>虚拟机启动时，定义了main()方法的那个类先初始化</li></ol><p>以上情况称为称对一个类进行“<strong>主动引用</strong>”，除此种情况之外，均不会触发类的初始化，称为“<strong>被动引用</strong>”</p><p><strong>被动引用</strong>：</p><ol><li>子类调用父类的静态变量，子类不会被初始化。只有父类被初始化</li><li>通过数组定义来引用类，不会触发类的初始化</li><li>访问类的常量，不会初始化类</li></ol><h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><ol><li><strong>加载</strong>：类加载”(Class Loading)过程的第一个阶段。</li><li><strong>验证</strong></li><li><strong>准备</strong>：准备阶段是为类的静态变量分配内存并将其初始化为默认值，这些内存都将在方法区中进行分配。准备阶段不分配类中的实例变量的内存，实例变量将会在对象实例化时随着对象一起分配在Java堆中。</li><li><strong>解析</strong></li><li><strong>初始化</strong>：类初始化是类加载过程的最后一步，前面的类加载过程，除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作完全由虚拟机主导和控制。<strong>到了初始化阶段，才真正开始执行类中定义的Java程序代码</strong></li></ol><p>如有继承，初始化步骤：</p><ol><li>基类静态</li><li>派生类静态</li><li>基类普通代码块</li><li>基类构造函数</li><li>派生类普通代码块</li><li>派生类构造函数。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>语言</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>边缘计算</title>
+    <link href="/2022/02/19/%E5%AD%A6%E4%B9%A0/edge-of-computing/"/>
+    <url>/2022/02/19/%E5%AD%A6%E4%B9%A0/edge-of-computing/</url>
+    
+    <content type="html"><![CDATA[<h1 id="边缘计算"><a href="#边缘计算" class="headerlink" title="边缘计算"></a>边缘计算</h1><h2 id="章鱼说"><a href="#章鱼说" class="headerlink" title="章鱼说"></a>章鱼说</h2><p>章鱼拥有巨量的神经元，但 60% 分布在腿上，40% 分布在大脑，类似于分布式计算：“多个小脑 + 一个大脑”。</p><p>边缘计算：在网络边缘侧的智能网管上就近处理采集到的数据，不需要将大量数据上传到远端管理平台。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>边缘计算</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++新特性</title>
+    <link href="/2022/02/19/%E5%AD%A6%E4%B9%A0/C-advanced-features/"/>
+    <url>/2022/02/19/%E5%AD%A6%E4%B9%A0/C-advanced-features/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-新特性"><a href="#C-新特性" class="headerlink" title="C++新特性"></a>C++新特性</h1><h2 id="C-11"><a href="#C-11" class="headerlink" title="C++11"></a>C++11</h2><h3 id="auto-amp-decltype"><a href="#auto-amp-decltype" class="headerlink" title="auto &amp; decltype"></a>auto &amp; decltype</h3><p>可以在<strong>编译阶段</strong>推导出变量或者表达式的类型。<br><strong>auto：</strong> 推导 变量类型。<br><code>auto x = 1;</code><br><strong>decltype：</strong> 推导 表达式类型。<br><code>decltype(x);</code></p><h3 id="左值-和-右值"><a href="#左值-和-右值" class="headerlink" title="左值 和 右值"></a>左值 和 右值</h3><p><strong>左值：</strong> 可以取地址，有名字<br><strong>右值：</strong> 不能取地址、没有名字<br><strong>纯右值：</strong> 运算表达式产生的临时变量，非引用返回的临时变量，lambda表达式等。<br><strong>将亡值：</strong> 将要销毁的值<br><strong>左值引用：</strong><br><strong>右值引用：</strong>：</p><blockquote><p>右值引用出现之前, 右值的地址只能绑定到常量左值</p></blockquote><p><strong>移动语义：</strong> </p><blockquote><p>为了解决进行大数据复制的时候，进行大量的数据移动，记节省空间又提高效率。<br>转移资源所有权，类似于转让或者资源窃取，对于那个资源，转为自己所有，别人不再拥有也不会再使用。</p></blockquote><p><strong>移动构造函数：</strong></p><blockquote><p><strong>std::move的本质</strong>，就是一个转换函数，将给定的类型转化为右值引用，而并不是真正地“移动”了资源</p></blockquote><blockquote><p>如果同时提供了复制构造函数和移动构造函数(或运算符)，<strong>则当实参为右值 (如临时变量或 std::move函数的结果) 时，将会调用移动构造函数</strong>，<strong>当实参为左值时，选择复制赋值</strong>。若仅提供了复制赋值，则所有值类别时都选择它（只要它按值或按到 const 的引用接收其实参），这使得在移动不可用时，以复制赋值成为移动赋值的后备。<br>注: 如果在执行移动语义时, 涉及的数据中有指向堆内存的指针, 该指针交出数据的所有权，为了不出现析构两次同一内存区域，<strong>要将交出所有权的数据的指向动态申请内存区的指针赋值为空指针</strong>(如 nullptr)，而对空指针执行delete &#x2F; delete[]是合法的</p></blockquote><p><strong>完美转发：</strong> 可以写一个接受任意实参的函数模板，并转发到其他函数，目标函数会受到与转发函数完全相同的实参</p><h3 id="列表初始化"><a href="#列表初始化" class="headerlink" title="列表初始化"></a>列表初始化</h3><p>C++11中可以直接在变量名后加上初始化列表进行对象的初始化。</p><h3 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h3><p>对函数的封装发挥到了极致。</p><h3 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h3><h3 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h3><p>引入了智能指针的概念，方便管理堆内存，使得自动、异常安全的对象生存期管理可行。解决内存泄露问题，构造函数不能被隐式调用</p><p><strong>摒弃auto_ptr的原因</strong>，一句话总结就是：避免潜在的内存崩溃问题。</p><ol><li><strong>std::shared_ptr</strong>：使用了引用计数，每一个shared_ptr的拷贝都指向相同的内存，每次拷贝都会触发引用计数+1，每次生命周期结束析构的时候引用计数-1，在最后一个shared_ptr析构的时候，内存才会释放。</li><li>std::weak_ptr</li><li>std::unique_ptr</li></ol><h3 id="范围for"><a href="#范围for" class="headerlink" title="范围for"></a>范围for</h3><h3 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h3><h3 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h3><p>空指针引入的常量值。</p><h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>delele函数在c++11中很常用，std::unique_ptr就是通过delete修饰来禁止对象的拷贝的</p><h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><blockquote><p><strong>编译时的常量和常量函数</strong></p></blockquote><blockquote><p>与const区别：<br>两者都代表可读，const只表示read only的语义，只保证了运行时不可以被修改，但它修饰的仍然有可能是个动态变量，而constexpr修饰的才是真正的常量，它会在编译期间就会被计算出来，整个运行过程中都不可以被改变，<strong>constexpr可以用于修饰函数，这个函数的返回值会尽可能在编译期间被计算出来当作一个常量，但是如果编译期间此函数不能被计算出来，那它就会当作一个普通函数被处理。</strong></p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>   <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>   <span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>;<br>   <span class="hljs-built_in">func</span>(i);<span class="hljs-comment">// 普通函数</span><br>   <span class="hljs-built_in">func</span>(<span class="hljs-number">2</span>);<span class="hljs-comment">// 编译期间就会被计算出来</span><br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>语言</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vscode写博客时如何优雅插入反引号？</title>
+    <link href="/2022/02/19/%E7%94%9F%E6%B4%BB/back_quote_in_vscode/"/>
+    <url>/2022/02/19/%E7%94%9F%E6%B4%BB/back_quote_in_vscode/</url>
+    
+    <content type="html"><![CDATA[<p>TODO</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>一致性哈希与分布式系统</title>
+    <link href="/2022/02/19/%E5%AD%A6%E4%B9%A0/consistent_hash/"/>
+    <url>/2022/02/19/%E5%AD%A6%E4%B9%A0/consistent_hash/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一致性哈希的应用"><a href="#一致性哈希的应用" class="headerlink" title="一致性哈希的应用"></a>一致性哈希的应用</h1><h2 id="负载均衡算法"><a href="#负载均衡算法" class="headerlink" title="负载均衡算法"></a>负载均衡算法</h2><p>加权轮询：把外界的请求轮流发给内部计算节点，如果内部节点的硬件配置不同，可以分配不同的权重。要求每个节点都可计算。</p><p>但是对于 <strong>分布式系统</strong> 来说， 轮询就起不到作用了。因为每个机器存储的数据不同。</p><h2 id="传统-hash-算法"><a href="#传统-hash-算法" class="headerlink" title="传统 hash 算法"></a>传统 hash 算法</h2><p>使用取模运算：<code>hash = key % n</code> 来寻找对应机器。</p><p>但是对于 <strong>扩容</strong> 来说，就有些灾难了。<br>比如：原来有三个机器：<code>n = 3</code>，现在增加一个机器 <code>n = 4</code>，导致计算的 hash 值与真是对应机器编号不一致。例如： <code>key = 6</code>，原来计算的 hash 值为 <code>0</code>，现在计算 hash 值为 <code>2</code>，导致需要将大量的数据进行迁移。</p><h2 id="一致性-hash"><a href="#一致性-hash" class="headerlink" title="一致性 hash"></a>一致性 hash</h2><p>通过 hash 环实现，起点为<code>0</code>，终点为<code>2^32 - 1</code>。</p><ol><li>先映射数据。</li><li>映射服务器。</li><li>将数据缓存到顺时针查找距离最近的服务器上。</li></ol><p>但是由于数据分布不均衡，导致大量的数据缓存在同一台服务器上，如果该服务器失效，将所有的数据缓存到下一台服务器上，会导致雪崩效应。</p><h2 id="虚拟节点"><a href="#虚拟节点" class="headerlink" title="虚拟节点"></a>虚拟节点</h2><p>将每台服务器虚拟为一组服务器，均匀放置到 hash 环上，节点变多，分布就相对均匀。<br>需要两层映射，先映射虚拟服务器，再映射到实际服务器上。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>扩展性</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>数据库相关</title>
+    <link href="/2022/02/19/%E5%AD%A6%E4%B9%A0/database/"/>
+    <url>/2022/02/19/%E5%AD%A6%E4%B9%A0/database/</url>
+    
+    <content type="html"><![CDATA[<p>ORM</p><p>NoSQL</p><p><a href="https://zhuanlan.zhihu.com/p/181498475">LSM 树</a></p><h1 id="数据库复习"><a href="#数据库复习" class="headerlink" title="数据库复习"></a>数据库复习</h1><h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><p>数据库的目录。相当于字典上的字母目录。<br><strong>优点：</strong> 查的快<br><strong>缺点：</strong> 增删改慢，同步维护索引<br><strong>结构：</strong> B+树</p><h3 id="什么是聚簇索引"><a href="#什么是聚簇索引" class="headerlink" title="什么是聚簇索引"></a>什么是聚簇索引</h3><p>是一种存储方式，将数据存储和索引放到一起，找到索引就找到了数据。</p><h3 id="什么是非聚簇索引"><a href="#什么是非聚簇索引" class="headerlink" title="什么是非聚簇索引"></a>什么是非聚簇索引</h3><h2 id="二、事务"><a href="#二、事务" class="headerlink" title="二、事务"></a>二、事务</h2><p>sql是先写日志，再写数据库。<br>如果没有提交，断电，自动回滚。<br>事务已经提交，断电，根据日志继续执行。<br><a href="https://leetcode-cn.com/leetbook/read/database-handbook/px8dnd/">参考</a></p><h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><p><strong>Buffer Pool</strong>：大大提高了读写数据的效率，但是也带了新的问题：如果MySQL宕机，而此时Buffer Pool中修改的数据还没有刷新到磁盘，就会导致数据的丢失，事务的持久性无法保证。<br><strong>redo log</strong>：当数据修改时，除了修改Buffer Pool中的数据，还会在redo log记录这次操作；当事务提交时，会调用fsync接口对redo log进行刷盘。如果MySQL宕机，重启时可以读取redo log中的数据，对数据库进行恢复。redo log采用的是WAL（Write-ahead logging，预写式日志），所有修改先写入日志，再更新到Buffer Pool，保证了数据不会因MySQL宕机而丢失，从而满足了持久性要求。<br>刷脏是随机IO，因为每次修改的数据位置随机，但写redo log是追加操作，属于顺序IO。</p><p><strong>binlog</strong>：binlog是用于point-in-time recovery的，保证服务器可以基于时间点恢复数据，此外binlog还用于主从复制。binlog的内容是二进制的，根据binlog_format参数的不同，可能基于sql语句、基于数据本身或者二者的混合。</p><p><strong>undo log</strong>：Undo log 主要用于记录数据被修改之前的日志，在表信息修改之前先会把逆操作记录到undo log 里，当事务进行回滚时可以通过undo log 里的日志进行数据还原。</p><p><strong>事务的状态</strong><br>    1. 活跃状态<br>    2. 部分提交状态<br>    3. 失败状态<br>    4. 终止状态<br>    5. 提交状态</p><h3 id="四大特性"><a href="#四大特性" class="headerlink" title="四大特性"></a>四大特性</h3><p><strong>原子性</strong>：要么全部执行，要么全部不执行<br><strong>一致性</strong>：账户余额处于一致状态<br><strong>隔离性</strong>：各个事务不被其他事务干扰<br><strong>持久性</strong>：事务被提交，对数据的改变是持久的，即使发生故障也不能有任何影响</p><h2 id="三、锁"><a href="#三、锁" class="headerlink" title="三、锁"></a>三、锁</h2><p><strong>悲观锁</strong>：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。在查询完数据的时候就把事务锁起来，直到提交事务。这对于长事务来讲，可能会严重影响系统的并发处理能力。实现方式：使用数据库中的锁机制。</p><p><strong>乐观锁</strong>：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。乐观锁适用于 读多写少 的应用场景，这样可以提高吞吐量。实现方式：一般会使用版本号机制或 CAS 算法实现。</p><h2 id="二、优化"><a href="#二、优化" class="headerlink" title="二、优化"></a>二、优化</h2><p>1.表设计是否规范，是否符合三范式的标准<br>（1）第一范式：保证原子性（不可拆分）<br>（2）第二范式：每张表都有主键<br>（3）第三范式（每一列都有主键相关)<br>2.查看数据表中是否存在大量的冗余字段，字段数据类型是否合理<br>3.尽可能的使用varchar代替char 建表数据类型，能用数值的绝对不用字符存储<br>4.尽量避免null值，使用默认值替代空值，数值型可以使用0，字符型可以使用空字符串</p><h2 id="MySQL-主从复制的工作原理"><a href="#MySQL-主从复制的工作原理" class="headerlink" title="MySQL 主从复制的工作原理"></a>MySQL 主从复制的工作原理</h2><p>Master 端：打开二进制日志（binlog ）记录功能 —— 记录下所有改变了数据库数据的语句，放进 Master 的 binlog 中；</p><p>Slave 端：开启一个 I&#x2F;O 线程 —— 负责从 Master上拉取 binlog 内容，放进自己的中继日志（Relay log）中；</p><p>Slave 端：SQL 执行线程 —— 读取 Relay log，并顺序执行该日志中的 SQL 事件。</p><h2 id="MySQL-读写分离的实现方案"><a href="#MySQL-读写分离的实现方案" class="headerlink" title="MySQL 读写分离的实现方案"></a>MySQL 读写分离的实现方案</h2><p>在应用和数据库之间增加 代理层，代理层接收应用对数据库的请求，根据不同请求类型（即是读 read 还是写 write）转发到不同的实例<br>读发给从库，写发给主库</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数据库</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>分布式系统</title>
+    <link href="/2022/02/19/%E5%AD%A6%E4%B9%A0/distributed_system/"/>
+    <url>/2022/02/19/%E5%AD%A6%E4%B9%A0/distributed_system/</url>
+    
+    <content type="html"><![CDATA[<h1 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h1><h2 id="分布式-id-生成方案"><a href="#分布式-id-生成方案" class="headerlink" title="分布式 id 生成方案"></a>分布式 id 生成方案</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><ol><li>唯一性：生成的ID全局唯一，在特定范围内冲突概率极小</li><li>有序性：生成的ID按某种规则有序，便于数据库插入及排序。</li><li>可用性：可保证高并发下的可用性, 确保任何时候都能正确的生成ID。</li><li>自主性：分布式环境下不依赖中心认证即可自行生成ID。</li><li>安全性：不暴露系统和业务的信息, 如：订单数,用户数等。</li></ol><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ol><li><p>数据库自增ID：数据库水平拆分；每次生成一批ID；<br> <strong>优点：</strong><br> 简单，天然有序。</p><p> <strong>缺点：</strong><br> 1. 并发差。<br> 2. 数据库故障后不可用。</p></li><li><p>UUID生成：结合时间、随机数、mac地址生成UUID<br> <strong>优点：</strong><br> 本地生成，简单。<br> <strong>缺点：</strong></p><ol><li>不易存储。</li><li>不安全。</li></ol></li><li><p>雪花算法：把64bit分别划分成多段，分开表示时间、机器、序号等。<br> <strong>优点：</strong><br> 灵活</p></li></ol><h2 id="分布式事务的理解"><a href="#分布式事务的理解" class="headerlink" title="分布式事务的理解"></a>分布式事务的理解</h2><p><strong>事务</strong>就是为了保证不同数据库的数据一致性。<br><strong>ACID特性：</strong> 原子性、一致性、隔离性、持久性。</p><h2 id="实现负载均衡的方法"><a href="#实现负载均衡的方法" class="headerlink" title="实现负载均衡的方法"></a>实现负载均衡的方法</h2><ol><li>随机</li><li>轮询</li><li>一致哈希</li><li>主备</li></ol><h2 id="进程和线程和协程"><a href="#进程和线程和协程" class="headerlink" title="进程和线程和协程"></a>进程和线程和协程</h2><p><strong>进程</strong>：运行中的应用程序。每个进程拥有独立的地址空间。是<strong>系统进行资源调度和分配的基本单位</strong>，实现了操作系统的并发。</p><p><strong>线程</strong>：进程的子任务。是<strong>CPU调度和分派的基本单位，实现进程内部的并发。</strong></p><p><strong>协程</strong>：看上去也是子程序，但执行过程中，在子程序内部可中断，然后转而执行别的子程序，在适当的时候再返回来接着执行。</p><h3 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h3><p>进程通信方式：</p><ol><li>管道通信</li><li>消息队列通信</li><li>共享内存：映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。</li><li>套接字</li></ol><p>线程通信方式：</p><ol><li>等待&#x2F;通知机制</li></ol><h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>重复利用已创建的线程，减少资源消耗。<br>提高线程的可管理性。<br>提高响应速度</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>分布式</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>系统设计</title>
+    <link href="/2022/02/18/%E5%AD%A6%E4%B9%A0/system_design/"/>
+    <url>/2022/02/18/%E5%AD%A6%E4%B9%A0/system_design/</url>
+    
+    <content type="html"><![CDATA[<p><a href="http://c.biancheng.net/view/8375.html">参考</a><br><a href="https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md#%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%BC%95">参考github</a><br><a href="https://www.runoob.com/design-pattern/singleton-pattern.html">菜鸟</a></p><h1 id="优秀的软件架构"><a href="#优秀的软件架构" class="headerlink" title="优秀的软件架构"></a>优秀的软件架构</h1><h2 id="代码复用"><a href="#代码复用" class="headerlink" title="代码复用"></a>代码复用</h2><p>无论是开发哪种软件产品，成本和时间都是最重要的。<br>代码复用是减少开发成本最常用的方式之一，其目的非常明显，即：与其反复从头开发，不如在新对象中重用已有的代码。</p><hr><h2 id="扩展性"><a href="#扩展性" class="headerlink" title="扩展性"></a>扩展性</h2><p>需求变化是程序员生命中唯一不变的事情。</p><hr><h1 id="如何正确使用设计模式？"><a href="#如何正确使用设计模式？" class="headerlink" title="如何正确使用设计模式？"></a>如何正确使用设计模式？</h1><p>设计模式不是为了特定场景而生的，而是为了让大家可以更好和更快地开发。</p><h2 id="七大设计原则"><a href="#七大设计原则" class="headerlink" title="七大设计原则"></a>七大设计原则</h2><ol><li>开闭原则：对扩展开放，对修改关闭。降低维护带来的新风险。</li><li>依赖倒置原则：高层不应该依赖低层，要面向接口编程。更利于代码结构的升级扩展。</li><li>单一职责原则：一个类只干一件事，实现类要单一。便于理解，提高代码的可读性。</li><li>接口隔离原则：一个接口只干一件事，接口要精简单一。功能解耦，高聚合、低耦合</li><li>迪米特法则：不该知道的不要知道，一个类应该保持对其它对象最少的了解，降低耦合度。只和朋友交流，不和陌生人说话，减少代码臃肿。</li><li>里氏替换原则：不要破坏继承体系，子类重写方法功能发生改变，不应该影响父类方法的含义。防止继承泛滥。</li><li>合成复用原则：尽量使用组合或者聚合关系实现代码复用，少使用继承。降低代码耦合。</li></ol><p>这些原则的目的只有一个：降低对象之间的耦合，增加程序的可复用性、可扩展性和可维护性。<br>低耦合高内聚：内紧外松，坚信模块能完成它的任务。</p><hr><h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><p>创建型模式的主要关注点是“怎样创建对象？”，它的主要特点是“将对象的创建与使用分离”。这样可以降低系统的耦合度，使用者不需要关注对象的创建细节，对象的创建由相关的工厂来完成。就像我们去商场购买商品时，不需要知道商品是怎么生产出来一样，因为它们由专门的厂商生产。</p><h3 id="单例模式："><a href="#单例模式：" class="headerlink" title="单例模式："></a>单例模式：</h3><p>某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式</p><p>例子：Windows 中只能打开一个任务管理器，这样可以避免因打开多个任务管理器窗口而造成内存资源的浪费，或出现各个窗口显示内容的不一致等错误。</p><p><strong>关键</strong>：构造方法为私有。</p><p><strong>懒汉式创建</strong>：不着急创建对象，在需要的时候创建。</p><p><strong>饿汉式创建</strong>：系统初始化的时候就创建对象。</p><p><strong>UML：</strong><img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/system_design/20220218200456.png"></p><h3 id="原型模式："><a href="#原型模式：" class="headerlink" title="原型模式："></a>原型模式：</h3><p>将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。</p><h3 id="工厂方法模式："><a href="#工厂方法模式：" class="headerlink" title="工厂方法模式："></a>工厂方法模式：</h3><p>定义一个用于创建产品的接口，由子类决定生产什么产品</p><h3 id="抽象工厂模式："><a href="#抽象工厂模式：" class="headerlink" title="抽象工厂模式："></a>抽象工厂模式：</h3><p>提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品</p><h3 id="建造者模式："><a href="#建造者模式：" class="headerlink" title="建造者模式："></a>建造者模式：</h3><p>将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>系统设计</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>并发学习</title>
+    <link href="/2022/02/14/%E5%AD%A6%E4%B9%A0/concurrence/"/>
+    <url>/2022/02/14/%E5%AD%A6%E4%B9%A0/concurrence/</url>
+    
+    <content type="html"><![CDATA[<p>##<a href="https://leetcode-cn.com/leetbook/detail/concurrency/">大话并发总结</a><br>待填坑</p><span id="more"></span><h2 id="来历"><a href="#来历" class="headerlink" title="来历"></a>来历</h2><p>一项技术的出现必定不是凭空捏造的，一定是为了某个目的而来，在某个成熟的实际应运而生。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>并发</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++复习</title>
+    <link href="/2022/02/13/%E5%AD%A6%E4%B9%A0/c_plus_plus/"/>
+    <url>/2022/02/13/%E5%AD%A6%E4%B9%A0/c_plus_plus/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Part-I-编译内存相关"><a href="#Part-I-编译内存相关" class="headerlink" title="Part I 编译内存相关"></a>Part I 编译内存相关</h1><h2 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h2><blockquote><p>编译分为四个过程：预处理（#）、编译、汇编、链接。</p></blockquote><p><strong>静态链接</strong>：在链接阶段将库的内容导入到可执行程序中。<br><strong>动态链接</strong>：在程序运行时，由操作系统的装载程序加载库。</p><hr><h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p><strong>栈</strong>：存放函数的局部变量、函数参数、返回地址等，由编译器自动分配和释放<br><strong>堆</strong>：存放动态申请的空间，由程序员控制分配和释放，如果程序执行结束还没释放，操作系统会自动回收。<br>**全局区&#x2F;静态存储区 (.bss .data)**：存放常量，不允许修改，程序运行结束自动释放。<br>**代码区 (.text)**：存放代码，不允许修改，但可以执行。</p><hr><h2 id="栈和堆的区别"><a href="#栈和堆的区别" class="headerlink" title="栈和堆的区别"></a>栈和堆的区别</h2><ol><li><strong>申请方式</strong>：操作系统、程序员</li><li><strong>内存空间</strong>：连续、不连续</li><li><strong>申请效率</strong>：高，低</li><li><strong>存放内容</strong>：局部变量、由程序员控制</li></ol><hr><h2 id="变量的区别"><a href="#变量的区别" class="headerlink" title="变量的区别"></a>变量的区别</h2><ol><li><strong>全局变量</strong>：全局作用域。只需要在一个源文件中定义，就可以作用于所有源文件，但是，在其他源文件中使用时，需要使用<code>extern</code>关键字声明</li><li><strong>静态全局变量</strong>：文件作用域。即被 <code>static</code> 修饰的变量，只在该源文件内起作用。</li><li><strong>局部变量</strong>：局部作用域。像循环内部声明的变量，代码块执行完成后撤销，内存被收回。</li><li><strong>静态局部变量</strong>：局部作用域。只被初始化一次，从初始化到程序运行结束一直存在。只被定义自己的函数体可见。</li></ol><hr><h2 id="字和字节"><a href="#字和字节" class="headerlink" title="字和字节"></a>字和字节</h2><blockquote><p><strong>字节</strong>： 8个二进制位。<br><strong>字</strong>：由机器的寻址长度决定，16位机器1个字就是2个字节。</p></blockquote><hr><h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><ol><li><p><strong>有效对齐值</strong>：字的大小（操作系统数据处理的运算单位）</p></li><li><p><strong>是什么</strong>：编译器把程序中的“数据单元”安排在字的整数倍的地址指向的内存之中。</p></li><li><p><strong>为什么</strong>：</p><ol><li>平台原因（便于移植）</li><li>性能原因</li></ol></li><li><p><strong>原则</strong>：</p><ul><li>基本类型的对齐值就是其sizeof的值。</li><li>结构体第一个成员变量的偏移量为0， 以后每个成员<strong>相对于结构体首地址</strong>的offset都是<strong>该成员大小与有效对齐值中较小那个</strong>的整数倍。</li><li>结构体的总大小为<strong>有效对齐值</strong>的整数倍，如果不够，则在最末一个成员之后填充字节。</li></ul></li></ol><hr><h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><blockquote><p>由于疏忽或者错误导致的程序未能释放已经不再使用的内存。</p></blockquote><ul><li>常指堆内存泄露</li><li>指针重新赋值，导致空间无法找到。</li></ul><h3 id="防止内存泄露"><a href="#防止内存泄露" class="headerlink" title="防止内存泄露"></a>防止内存泄露</h3><ol><li><strong>内部封装</strong>：将内存的分配和释放封装到类中，构造的时候申请内存，析构的时候释放内存。</li><li><strong>智能指针</strong>：我们虽然可以在每次 new 完一个对象后，写出对应的 delete ，但我们不能保证在调用 delete 之前，程序不会发生错误或者提前返回。————智能指针是一个类，当超出类的作用域的时候，类会自动调用析构函数，析构函数会自动释放资源。</li></ol><hr><h2 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h2><p><strong>浅拷贝</strong>：位拷贝，把对象里的值完全复制给另一个对象，如A&#x3D;B。如果B中有一个成员变量指针已经申请了内存，那A中的成员变量也指向同一块内存。这就会出问题：假如B把内存释放了，这时A内的指针就是野指针了，出现运行错误。</p><p><strong>深拷贝</strong>：资源重新分配。 </p><hr><h2 id="类初始化"><a href="#类初始化" class="headerlink" title="类初始化"></a>类初始化</h2><h3 id="类变量初始化："><a href="#类变量初始化：" class="headerlink" title="类变量初始化："></a>类变量初始化：</h3><ol><li>引用</li><li>常量</li><li>静态变量</li><li>静态整型常量</li><li>静态非整型常量</li></ol><p>对于<strong>引用和常量</strong>：必须通过构造函数的初始化列表初始化。<br>对于 <strong>静态变量</strong>：类内定义，类外初始化，因为 static 独立该类的任意对象存在，它是类关联的对象，不与类对象关联。<br>对与 <strong>静态整型常量 和 静态非整型常量</strong>：可类内定义初始化，也可类内定义，类外初始化。</p><h3 id="类的编译顺序："><a href="#类的编译顺序：" class="headerlink" title="类的编译顺序："></a>类的编译顺序：</h3><ol><li>类名</li><li>成员名称</li><li>成员函数的返回值和形参</li><li>成员函数的函数体</li></ol><h3 id="编译时函数名"><a href="#编译时函数名" class="headerlink" title="编译时函数名"></a>编译时函数名</h3><p>类或命名空间中的变量或函数：<br>各个空间和类的名字，每个名字前是名的字符长度，然后是变量&#x2F;函数名的长度和变量&#x2F;函数名，后面紧跟”E”，然后如果是函数则跟参数别名，如果是变量则什么都不用加。<br>如：<br>mangling::C1::C2::func(int)<br>_ZN8mangling2C12C24funcEi</p><hr><h1 id="Part-II-语言对比"><a href="#Part-II-语言对比" class="headerlink" title="Part II 语言对比"></a>Part II 语言对比</h1><h2 id="C-11-新特性"><a href="#C-11-新特性" class="headerlink" title="C++ 11 新特性"></a>C++ 11 新特性</h2><ol><li><p><code>auto</code> 类型推导。编译器会在 <strong>编译期间</strong> 通过初始值推到出变量的类型。</p></li><li><p><code>decltype</code> 类型推导。是“declare type”的缩写，译为“声明类型”。<code>decltype</code> 作用是选择并返回操作数的数据类型。</p> <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">auto</span> var = var<span class="hljs-number">1</span> + var<span class="hljs-number">2</span>;<br><span class="hljs-attribute">decltype</span>(var<span class="hljs-number">1</span> + var<span class="hljs-number">2</span>) var = <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure></li><li><p><code>lambda</code> 表达式</p></li><li><p>范围 <code>for</code></p></li><li><p>右值引用<br> <strong>格式</strong>：</p><blockquote><p>类型 &amp;&amp; 引用名 &#x3D; 右值表达式;</p></blockquote><p> <strong>作用</strong>：</p><blockquote><p>充分利用右值的构造来减少对象构造和析构操作以达到提高效率的目的。</p></blockquote><p> 绑定到右值的引用，用<code>&amp;&amp;</code>来获得右值引用，右值引用智能绑定到要销毁的对象<br> <strong>左值</strong>：可以取地址的，有名字的，非临时的<br> <strong>右值</strong>：不能取地址，没有名字，临时的。立即数 -&gt; 右值。</p><p> <strong>左值和右值引用本质区别</strong>：</p><blockquote><p>创建和销毁由编译器幕后控制，程序员只能确保在本行代码有效的，就是右值；而由用户创建的，通过作用域规则可知其生存期的，就是左值。</p></blockquote><p> <strong>移动语义：</strong> </p><blockquote><p>为了解决进行大数据复制的时候，进行大量的数据拷贝问题<br>转移资源所有权，类似于转让或者资源窃取，对于那个资源，转为自己所有，别人不再拥有也不会再使用。</p></blockquote><p> <strong>移动构造函数：</strong></p><blockquote><p><strong>std::move的本质</strong>，就是一个转换函数，将给定的类型转化为右值引用，而并不是真正地“移动”了资源</p></blockquote><p> <strong>完美转发：</strong> </p><blockquote><p>可以写一个接受任意实参的函数模板，并转发到其他函数，目标函数会受到与转发函数完全相同的实参</p></blockquote></li><li><p><code>delete</code> ：<code>= delete</code> 表示该函数不能被调用。<br><code>default</code>：<code>= default</code> 表示编译器生成默认的函数。</p></li><li><p>列表初始化<br>C++11中可以直接在变量名后加上初始化列表进行对象的初始化。</p></li><li><p>智能指针<br>引入了智能指针的概念，方便管理堆内存，使得自动、异常安全的对象生存期管理可行。解决内存泄露问题，构造函数不能被隐式调用。<br> shared_ptr</p><p> weak_ptr</p><p> unique_ptr</p></li><li><p>constexpr：编译时的常量和常量函数</p><blockquote><p>与const区别：<br>两者都代表可读，const只表示read only的语义，只保证了运行时不可以被修改，但它修饰的仍然有可能是个动态变量，而constexpr修饰的才是真正的常量，它会在编译期间就会被计算出来，整个运行过程中都不可以被改变，<strong>constexpr可以用于修饰函数，这个函数的返回值会尽可能在编译期间被计算出来当作一个常量，但是如果编译期间此函数不能被计算出来，那它就会当作一个普通函数被处理。</strong></p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> i + <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>;<br>    <span class="hljs-built_in">func</span>(i);<span class="hljs-comment">// 普通函数</span><br>    <span class="hljs-built_in">func</span>(<span class="hljs-number">2</span>);<span class="hljs-comment">// 编译期间就会被计算出来</span><br>&#125;<br></code></pre></td></tr></table></figure></li></ol><hr><h2 id="C-和-C-的区别"><a href="#C-和-C-的区别" class="headerlink" title="C 和 C++ 的区别"></a>C 和 C++ 的区别</h2><ol><li>面向过程；面向对象。</li><li>嵌入式、驱动开发等与硬件直接打交道的领域；可以用于应用层开发等与操作系统打交道的领域。</li><li>C++ 增强方面：类型检查更为严格，增加了面向对象机制，泛型编程的机制，异常处理，运算符重载，标准模板库，命名空间。</li></ol><hr><h2 id="Java-和-C-的区别"><a href="#Java-和-C-的区别" class="headerlink" title="Java 和 C++ 的区别"></a>Java 和 C++ 的区别</h2><ol><li>java 是完全面向对象语言。</li><li>C++能够操作指针。</li><li>C++能多重继承。</li><li>java 支持垃圾回收，以线程的方式在后台运行，利用空闲时间。</li><li>场景：<br> java主要用来开发Web应用。<br> C++主要用在嵌入式开发、网络、并发编程的方面。</li></ol><hr><h2 id="Python-和-C-的区别"><a href="#Python-和-C-的区别" class="headerlink" title="Python 和 C++ 的区别"></a>Python 和 C++ 的区别</h2><ol><li>Python 是脚本语言，不经过编译。</li><li>面向更上层的开发者。</li></ol><hr><hr><h1 id="Part-III-面向对象"><a href="#Part-III-面向对象" class="headerlink" title="Part III 面向对象"></a>Part III 面向对象</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>对象是指具体的某个事物，事物即类，类中包括数据和动作。</p><hr><h2 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h2><ul><li><strong>封装</strong>：将具体的实现过程和数据封装成一个函数，智能通过接口进行访问，降低耦合性。</li><li><strong>继承</strong>：子类继承父类的特征和行为，子类有父类的非<code>private</code>方法或成员变量，子类可以对父类的方法进行重写，增强类之间的耦合性，不能继承<code>final</code>关键字修饰的变量和函数。</li><li><strong>多态</strong>：多态就是不同继承类的对象，对同一消息做出不同的响应，基类的指针指向或绑定到派生类的对象，使基类指针呈现出不同的表现方式。 shape、rectangle、triangle。-&gt;area();</li></ul><hr><h2 id="重载、重写、隐藏的区别"><a href="#重载、重写、隐藏的区别" class="headerlink" title="重载、重写、隐藏的区别"></a>重载、重写、隐藏的区别</h2><ol><li>重载：对同一可访问区内被声明的几个具有不同参数的同名函数，根据参数列表确定调用哪个函数，重载不关心返回类型，<strong>即返回类型必须相同</strong>。</li><li>隐藏：派生类的函数屏蔽与其同名的基类函数。</li><li>重写：派生类中存在重新定义的函数，且只有函数体不一样，且基类函数要被<code>virtual</code>修饰。</li></ol><hr><h2 id="多态的实现"><a href="#多态的实现" class="headerlink" title="多态的实现"></a>多态的实现</h2><ol><li>在类中使用<code>virtual</code>关键字声明的函数叫做虚函数。</li><li>存在虚函数的类都有一个虚函数表，当创建一个该类的对象时，该对象有一个指向虚函数表的虚表指针。</li><li>当基类指针指向派生类对象，基类调用虚函数，基类指针指向派生类的虚表指针，由于该虚表指针指向派生类虚函数表，通过遍历虚表，寻找相应的虚函数。</li></ol><hr><h1 id="Part-IV-关键字库函数"><a href="#Part-IV-关键字库函数" class="headerlink" title="Part IV 关键字库函数"></a>Part IV 关键字库函数</h1><h2 id="sizeof-和-strlen-区别"><a href="#sizeof-和-strlen-区别" class="headerlink" title="sizeof 和 strlen 区别"></a>sizeof 和 strlen 区别</h2><p>strlen ：测量的是字符串的实际长度，以\0结束。<br>sizeof ：测量的是空间分配大小，单位为字节。</p><hr><h2 id="lambda-表达式的具体应用和使用场景"><a href="#lambda-表达式的具体应用和使用场景" class="headerlink" title="lambda 表达式的具体应用和使用场景"></a>lambda 表达式的具体应用和使用场景</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">[捕获列表]() -&gt; <span class="hljs-keyword">return</span> &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure><ol><li>捕获列表: &amp; 为引用捕获， &#x3D; 为值捕获。</li><li>通常和排序结合，或者使用 <code>auto</code> 关键字在函数中定义。</li></ol><hr><h2 id="explicit-作用"><a href="#explicit-作用" class="headerlink" title="explicit 作用"></a>explicit 作用</h2><p>用来声明类构造函数是显示调用的，可以阻止调用构造函数时进行隐式转换。<br>隐式转换：先创建一个值为 10 的 A 对象，在赋值给 ex1 。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">int</span> var;<br>    <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">A</span><span class="hljs-params">(<span class="hljs-keyword">int</span> tmp)</span></span><br><span class="hljs-function">    </span>&#123;<br>        var = tmp;<br>        cout &lt;&lt; var &lt;&lt; endl;<br>    &#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function">A <span class="hljs-title">ex</span><span class="hljs-params">(<span class="hljs-number">100</span>)</span></span>;<br>    A ex1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// error: conversion from &#x27;int&#x27; to non-scalar type &#x27;A&#x27; requested</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><hr><h2 id="static-作用-（need-to-learn-further）"><a href="#static-作用-（need-to-learn-further）" class="headerlink" title="static 作用 （need to learn further）"></a>static 作用 （need to learn further）</h2><p>定义静态变量和函数。</p><blockquote><p>作用：<br>    1. 保持变量内容持久，<br>    2. 隐藏： static 修饰全局变量，则可对其他源文件不可见。<br>    3. 可以不实例化对象通过类访问静态成员。<br>    4. 类的静态成员函数中只能访问静态成员变量或静态成员函数，不能将静态成员函数定义成虚函数。</p></blockquote><blockquote><p>在类中使用注意事项<br>    1. 静态成员变量在类内进行声明，在类外进行定义和初始化。<br>    2. 静态成员变量可以相当于类域中的全局变量，被类的所有对象共享，包括派生类的对象。<br>    3. 静态成员变量可以作为成员函数的参数，普通变量不行。<br>    4. 静态成员变量可以是所属类的类型，而普通的只能是该类类型的指针或引用。<br>    5. 静态成员函数不能调用非静态成员变量或非静态成员函数，因为静态成员函数没有<code>this</code>指针。</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 上文注意4.</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span><br><span class="hljs-class">    &#123;</span><br>    <span class="hljs-keyword">public</span>:<br>        <span class="hljs-keyword">static</span> A s_var; <span class="hljs-comment">// 正确，静态数据成员</span><br>        A var;          <span class="hljs-comment">// error: field &#x27;var&#x27; has incomplete type &#x27;A&#x27;</span><br>        A *p;           <span class="hljs-comment">// 正确，指针</span><br>        A &amp;var1;        <span class="hljs-comment">// 正确，引用</span><br>    &#125;;<br></code></pre></td></tr></table></figure><hr><h2 id="const-作用及用法"><a href="#const-作用及用法" class="headerlink" title="const 作用及用法"></a>const 作用及用法</h2><blockquote><p>作用：<br>    - const 修饰成员变量，可进行类型检查，节省内存空间，提高效率。<br>    - 修饰函数参数，使函数参数的值不可改变。<br>    - 修饰成员函数，使成员函数不能修改成员变量，也不能调用非 const 成员函数。</p></blockquote><blockquote><p>用法<br>    - <strong>const 成员变量只能在类内声明，在构造函数初始化列表中初始化</strong></p></blockquote><hr><h2 id="define-和-const-区别"><a href="#define-和-const-区别" class="headerlink" title="define 和 const 区别"></a>define 和 const 区别</h2><ul><li>define 在编译预处理阶段进行替换，const在编译阶段确定其值。</li><li>安全性：define 定义的宏常量没有数据类型，只进行简单的替换，不会进行类型安全检查； const定义的常量是有类型的，需要进行判断。</li><li>内存占用：define 定义的宏常量，在程序中使用多少次就会进行多少次替换，内存中有多个备份，占用的是代码段的空间； const定义的常量只有一份，在静态存储区的空间。</li><li>调试： define 定义的不能调试，因为在预编译阶段已经进行替换；</li></ul><hr><h2 id="define-和-typedef-的区别"><a href="#define-和-typedef-的区别" class="headerlink" title="define 和 typedef 的区别"></a>define 和 typedef 的区别</h2><ul><li>原理<blockquote><p>#define 预编译阶段、简单替换、不做正确性检查。<br>  typedef 是关键字，在编译时处理，有类型检查，用来给一个已经存在的类型一个别名</p></blockquote></li><li>功能：<blockquote><p>#define 可以为类型取别名、定义常量、变量、编译开关。</p></blockquote></li><li>作用域；<blockquote><p>#define 没有作用域； typedef 有。</p></blockquote></li></ul><hr><h2 id="inline-作用"><a href="#inline-作用" class="headerlink" title="inline 作用"></a>inline 作用</h2><h3 id="内联函数的作用："><a href="#内联函数的作用：" class="headerlink" title="内联函数的作用："></a>内联函数的作用：</h3><ol><li><p>消除函数调用的开销。<br>在内联函数出现之前，程序员通常用 #define 定义一些“函数”来消除调用这些函数的开销。内联函数设计的目的之一，就是取代 #define 的这项功能</p></li><li><p>去除函数只能定义一次的限制。<br>内联函数可以在头文件中被定义，并被多个 .cpp 文件 include，而不会有重定义错误。这也是设计内联函数的主要目的之一。</p></li></ol><h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ul><li>不发生状态转移关系，而是在编译阶段将函数体嵌入到每一个调用该函数的语句块中。</li><li>普通函数是将程序执行到被调用函数所存放的内存地址，当函数执行完后，返回到执行此函数前的地方。转移操作需要保护现场和恢复现场，需要较大的资源开销。</li></ul><hr><h2 id="delete-实现原理"><a href="#delete-实现原理" class="headerlink" title="delete 实现原理"></a>delete 实现原理</h2><ol><li>首先调用该对象所属类的析构函数</li><li>进而调用 operator delete 的标准库函数来释放所占的内存空间。</li></ol><p>delete[] 用来释放数组空间。</p><hr><h2 id="new-和-malloc、-delete-和-free-区别。"><a href="#new-和-malloc、-delete-和-free-区别。" class="headerlink" title="new 和 malloc、 delete 和 free 区别。"></a>new 和 malloc、 delete 和 free 区别。</h2><ol><li>malloc 和 free 是库函数； new 和 delete 是关键字。</li><li>new 无需指定空间大小， malloc 需要确定申请空间大小。</li><li>new 返回的是对象的指针，malloc 返回的是 <code>void *</code>，需要强制类型转换。</li><li>new 在自由存储区上分配内存， malloc 在堆上分配。</li></ol><hr><h2 id="C-和-C-struct-区别"><a href="#C-和-C-struct-区别" class="headerlink" title="C 和 C++ struct 区别"></a>C 和 C++ struct 区别</h2><p>C++中的 struct 和类一样。</p><hr><h2 id="volatile-关键字"><a href="#volatile-关键字" class="headerlink" title="volatile 关键字"></a>volatile 关键字</h2><p>volatile 提醒编译器它后面所定义的变量随时都有可能改变，因此编译后的程序每次需要存储或读取这个变量的时候，都会直接从变量地址中读取数据。<br>如果没有volatile关键字，则编译器可能优化读取和存储，可能暂时使用寄存器中的值，如果这个变量由别的程序更新了的话，将出现不一致的现象。</p><h3 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h3><ul><li>多线程都会用到某已变量，需要修饰。</li><li>中断服务程序、并行设备</li></ul><hr><h2 id="memcpy-和-memmove"><a href="#memcpy-和-memmove" class="headerlink" title="memcpy 和 memmove"></a>memcpy 和 memmove</h2><p>memcpy 不保证拷贝的正确性。<br>memmove 保证拷贝的正确性。<br>    内存重叠，判断从左往右还是从右往左拷贝。</p><hr><h2 id="strcpy-有什么缺陷"><a href="#strcpy-有什么缺陷" class="headerlink" title="strcpy 有什么缺陷"></a>strcpy 有什么缺陷</h2><p>不检查目标缓冲区的大小边界，可能导致溢出。</p><hr><h2 id="auto-变量"><a href="#auto-变量" class="headerlink" title="auto 变量"></a>auto 变量</h2><p>“做函数模板需要做的事情”<br>基本类型和值是一样的，但是第二属性（const volatile） 不一定相同。</p><hr><h1 id="Part-V-类相关"><a href="#Part-V-类相关" class="headerlink" title="Part V 类相关"></a>Part V 类相关</h1><h2 id="虚函数、纯虚函数"><a href="#虚函数、纯虚函数" class="headerlink" title="虚函数、纯虚函数"></a>虚函数、纯虚函数</h2><p><strong>虚函数</strong>：</p><blockquote><p>被 virtual 关键字修饰的成员函数</p></blockquote><p><strong>纯虚函数</strong>：</p><blockquote><p>在类中声明，加上 <code>= 0;</code><br>只要含有纯虚函数的类称为抽象类，类中只有接口，没有具体的实现方法。<br>继承纯虚函数的派生类，如果没有完全实现基类纯虚函数，依然是抽象类，不能实例化。</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">v_fun</span><span class="hljs-params">()</span> <span class="hljs-comment">// 虚函数</span></span><br><span class="hljs-function">    </span>&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A::v_fun()&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    <span class="hljs-comment">// virtual void v_fun() = 0; 纯虚函数</span><br>&#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> :</span> <span class="hljs-keyword">public</span> A<br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">v_fun</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B::v_fun()&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure><p><strong>区别</strong></p><ul><li>虚函数和纯虚函数可以同时出现在一个类中。</li><li>使用方式不同：虚函数可以直接使用，纯虚函数需要在派生类实现后才能使用。</li><li>定义形式不同：virtual  和  &#x3D; 0;</li><li>虚函数必须实现</li><li>如果一个类需要被继承，为了避免内存泄露，<strong>析构函数应设置为虚函数</strong>；反之，不要设置成虚函数。</li></ul><hr><h2 id="虚函数的实现机制"><a href="#虚函数的实现机制" class="headerlink" title="虚函数的实现机制"></a>虚函数的实现机制</h2><h3 id="实现机制"><a href="#实现机制" class="headerlink" title="实现机制"></a>实现机制</h3><blockquote><p>虚函数通过虚函数表实现。虚函数的地址保存在虚函数表中，在类的对象所在的内存空间中，保存了指向虚函数表的指针（<strong>虚表指针</strong>），通过虚表指针可以找到类对应的虚函数表，虚函数表解决了基类和派生类的继承问题和类中成员函数的覆盖问题。<strong>当用基类的指针来操作一个派生类的时候，虚函数表就指明了实际应该调用的函数。</strong></p></blockquote><h3 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h3><p>内容：类的虚函数的地址。<br>建立时间：编译阶段。<br>虚表指针位置：对象的内存空间中最前面的位置。</p><ol><li>只要有虚函数(无论是继承来的还是本类自己定义的)就一定有虚表指针和虚函数表</li><li>同一个类的不同对象，虚表指针和虚函数表一样</li><li>不同类的对象，虚表指针不一样；至于虚函数表中的函数指针是否一样，主要看是否重写了虚函数</li><li>多继承，需要有多个虚表指针。<ul><li>两个虚函数指针分别指两个虚函数表。每个虚函数表保存每个父类的虚函数地址。</li><li>内存布局与继承的父类的顺序有关，子类的虚函数插入到第一个虚指针所指的虚函数表中。</li><li>特别关注子类的虚析构函数。第二个虚指针调用虚析构函数时，会跳转到第一个虚函数表调用子类虚析构函数。</li><li>子类的虚函数表中虚函数的顺序与父类一样，若子类重写父类虚函数，即在虚函数表中原位置覆盖即可。</li></ul></li></ol><hr><h2 id="构造函数一般不定义为虚函数原因"><a href="#构造函数一般不定义为虚函数原因" class="headerlink" title="构造函数一般不定义为虚函数原因"></a>构造函数一般不定义为虚函数原因</h2><ol><li>存储空间考虑：构造函数是在实例化对象的时候调用，如果构造函数是虚函数，需要通过访问该对象所在的内存空间才能进行虚函数的调用（虽然编译的时候就有虚函数表了，但是没有虚函数的指针，续表指针只有创建了对象才有）</li><li>使用角度：虚函数是基类的指针指向派生类的对象时，通过该指针实现对派生类的虚函数调用。</li></ol><hr><h2 id="如何避免拷贝"><a href="#如何避免拷贝" class="headerlink" title="如何避免拷贝"></a>如何避免拷贝</h2><p>使用delete关键字。</p><hr><h2 id="如何减少构造函数开销"><a href="#如何减少构造函数开销" class="headerlink" title="如何减少构造函数开销"></a>如何减少构造函数开销</h2><p>使用类初始化列表。</p><p>因为C++规定，对象的成员变量的初始化动作发生在进入构造函数本体之前。如果在构造函数中初始化，则会先调用默认的构造函数为成员变量设初值。</p><hr><h2 id="如何解决多重继承命名冲突问题"><a href="#如何解决多重继承命名冲突问题" class="headerlink" title="如何解决多重继承命名冲突问题"></a>如何解决多重继承命名冲突问题</h2><p>使用虚继承，保证存在命名冲突的成员变量或函数在派生类中只保留一份。</p><hr><h2 id="空类占多少字节，编译器会生成哪些函数？"><a href="#空类占多少字节，编译器会生成哪些函数？" class="headerlink" title="空类占多少字节，编译器会生成哪些函数？"></a>空类占多少字节，编译器会生成哪些函数？</h2><p>1字节<br>编译器会生成 6 个成员函数：缺省的构造函数、拷贝构造函数、析构函数、赋值运算符、两个取址运算符</p><hr><h2 id="为什么拷贝构造函数必须为引用？"><a href="#为什么拷贝构造函数必须为引用？" class="headerlink" title="为什么拷贝构造函数必须为引用？"></a>为什么拷贝构造函数必须为引用？</h2><p>因为形参需要调用拷贝构造函数，构造函数无限制递归，导致栈溢出</p><hr><h3 id="类对象的初始化顺序"><a href="#类对象的初始化顺序" class="headerlink" title="类对象的初始化顺序"></a>类对象的初始化顺序</h3><p>构造函数顺序：<br>     - 按照派生类继承基类的顺序，即派生列表声明的顺序，依次调用基类的构造函数<br>     - 按照派生类中成员变量的声明顺序，依次调用派生类中成员变量所属类的构造函数<br>     - 执行派生类自身的构造函数。</p><p>析构顺序和构造顺序相反。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;A()&quot;</span> &lt;&lt; endl; &#125;<br>    ~<span class="hljs-built_in">A</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;~A()&quot;</span> &lt;&lt; endl; &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">B</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;B()&quot;</span> &lt;&lt; endl; &#125;<br>    ~<span class="hljs-built_in">B</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;~B()&quot;</span> &lt;&lt; endl; &#125;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> :</span> <span class="hljs-keyword">public</span> A, <span class="hljs-keyword">public</span> B <span class="hljs-comment">// 派生列表</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Test</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;Test()&quot;</span> &lt;&lt; endl; &#125;<br>    ~<span class="hljs-built_in">Test</span>() &#123; cout &lt;&lt; <span class="hljs-string">&quot;~Test()&quot;</span> &lt;&lt; endl; &#125;<br><br><span class="hljs-keyword">private</span>:<br>    B ex1;<br>    A ex2;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    Test ex;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">运行结果：</span><br><span class="hljs-comment">A()</span><br><span class="hljs-comment">B()</span><br><span class="hljs-comment">B()</span><br><span class="hljs-comment">A()</span><br><span class="hljs-comment">Test()</span><br><span class="hljs-comment">~Test()</span><br><span class="hljs-comment">~A()</span><br><span class="hljs-comment">~B()</span><br><span class="hljs-comment">~B()</span><br><span class="hljs-comment">~A()</span><br><span class="hljs-comment">*/</span><br><br>作者：力扣 (LeetCode)<br>链接：https:<span class="hljs-comment">//leetcode-cn.com/leetbook/read/cpp-interview-highlights/efurq1/</span><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br></code></pre></td></tr></table></figure><hr><h2 id="实例化一个对象的过程"><a href="#实例化一个对象的过程" class="headerlink" title="实例化一个对象的过程"></a>实例化一个对象的过程</h2><ul><li>分配空间</li><li>（可选，如有虚函数，先给虚表指针赋值）</li><li>初始化</li><li>赋值</li></ul><p>ps： 初始化在赋值之前，可在初始化列表那里了解。</p><hr><h2 id="友元函数作用及使用场景。"><a href="#友元函数作用及使用场景。" class="headerlink" title="友元函数作用及使用场景。"></a>友元函数作用及使用场景。</h2><p>作用：通过友元，一个不同函数或另一个类中的成员函数可以访问类中的私有成员和保护成员。</p><p>使用 friend 关键字。</p><hr><h2 id="静态绑定和动态绑定"><a href="#静态绑定和动态绑定" class="headerlink" title="静态绑定和动态绑定"></a>静态绑定和动态绑定</h2><p>静态绑定是指程序在<strong>编译阶段</strong>确定类型<br>动态绑定是指程序在<strong>运行阶段</strong>确定类型。</p><p>动态绑定只发生在基类指针指向派生类对象。</p><hr><h1 id="Part-VI-语言特性相关"><a href="#Part-VI-语言特性相关" class="headerlink" title="Part VI 语言特性相关"></a>Part VI 语言特性相关</h1><h2 id="重载运算符"><a href="#重载运算符" class="headerlink" title="重载运算符"></a>重载运算符</h2><ol><li>（）为函数调用运算符</li></ol><hr><h2 id="指针常量-和-常量指针。"><a href="#指针常量-和-常量指针。" class="headerlink" title="指针常量 和 常量指针。"></a>指针常量 和 常量指针。</h2><p>int 和 const 位置没有关系<br>由 const 和 * 的位置决定<br>const 在 * 左边：表示常量指针（不能修改指向的内容）<br>const 在 * 右边：表示指针常量（不能修改指针）</p><hr><h2 id="函数指针-和-指针函数"><a href="#函数指针-和-指针函数" class="headerlink" title="函数指针 和 指针函数"></a>函数指针 和 指针函数</h2><p><strong>指针函数</strong>：正常的函数，返回的是指针。<br><strong>函数指针</strong>：指向函数的指针</p><hr><h2 id="指针-和-引用"><a href="#指针-和-引用" class="headerlink" title="指针 和 引用"></a>指针 和 引用</h2><ol><li>指针可以多级，引用只有一级</li><li>指针可以为空，引用不可为空</li><li>指针占空间，引用不占空间</li><li>指针指向的内存空间可以变，引用一旦绑定不可更改。</li></ol><hr><h2 id="C-11-nullptr-和-NULL"><a href="#C-11-nullptr-和-NULL" class="headerlink" title="C++11 nullptr 和 NULL"></a>C++11 nullptr 和 NULL</h2><ol><li>nullptr 有类型，可以转换成任意指针类型； NULL 是预处理变量，通过宏定义，值为 0</li><li>函数重载 nullptr 能够绑定到参数上， NULL 不能</li></ol><hr><h2 id="野指针-和-悬空指针。"><a href="#野指针-和-悬空指针。" class="headerlink" title="野指针 和 悬空指针。"></a>野指针 和 悬空指针。</h2><hr><h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>static_cast<int>()：良性转换。不能对指针进行转换。<br>const_cast&lt;int *&gt;()：用于去掉 const&#x2F;volatile。<br>reinterpret_cast&lt;int *&gt;()：static_cast 的补充，完成指针之间的转换<br>dynamic_cast&lt;B *&gt;()：通过RTTI动态向上向下转型。向上转型不做检查（有可能指针本身问题导致错误），向下转型需要检查，只有基类指向派生类才可以向下转型。</p><hr><h2 id="结构体如何判断相等？"><a href="#结构体如何判断相等？" class="headerlink" title="结构体如何判断相等？"></a>结构体如何判断相等？</h2><p>需要重载操作符 &#x3D;&#x3D; 判断。<br>不能使用 memcmp 函数，因为结构体保存时会发生内存对齐，随机填充的值不保证相同。</p><hr><h2 id="类型萃取"><a href="#类型萃取" class="headerlink" title="类型萃取"></a>类型萃取</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>编程语言</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>树洞</title>
+    <link href="/2022/02/11/%E7%94%9F%E6%B4%BB/emotional/"/>
+    <url>/2022/02/11/%E7%94%9F%E6%B4%BB/emotional/</url>
+    
+    <content type="html"><![CDATA[<h1 id="我是一个小树洞，啦啦啦"><a href="#我是一个小树洞，啦啦啦" class="headerlink" title="我是一个小树洞，啦啦啦"></a>我是一个小树洞，啦啦啦</h1><hr><h2 id="2022-x2F-2-x2F-11"><a href="#2022-x2F-2-x2F-11" class="headerlink" title="2022&#x2F;2&#x2F;11"></a>2022&#x2F;2&#x2F;11</h2><p>目前 leetcode 已经刷了400+题了，肯定有提升！开心！<br><img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211164742.png"></p><p>毕设开个头，遇到困难一定不要退缩呀！！！加油！！！</p><hr><h2 id="2022-x2F-2-x2F-14"><a href="#2022-x2F-2-x2F-14" class="headerlink" title="2022&#x2F;2&#x2F;14"></a>2022&#x2F;2&#x2F;14</h2><p>山外青山楼外楼</p><hr><h2 id="2022-x2F-3-x2F-23"><a href="#2022-x2F-3-x2F-23" class="headerlink" title="2022&#x2F;3&#x2F;23"></a>2022&#x2F;3&#x2F;23</h2><p>目前 leetcode 已经刷了600+题了，竞赛这周已经过1800分！加油<br><img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/binary-indexed-tree/20220323205147.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>生活</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>情感</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>大数据相关</title>
+    <link href="/2022/02/04/%E5%AD%A6%E4%B9%A0/big_data/"/>
+    <url>/2022/02/04/%E5%AD%A6%E4%B9%A0/big_data/</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h1 id="Map-Reduce"><a href="#Map-Reduce" class="headerlink" title="Map-Reduce"></a>Map-Reduce</h1><p>我们要数图书馆中的所有书。你数1号书架，我数2号书架。这就是“Map”。我们人越多，数书就更快。</p><p>现在我们到一起，把所有人的统计数加在一起。这就是“Reduce”。</p><hr><h1 id="spark-和-hadoop区别"><a href="#spark-和-hadoop区别" class="headerlink" title="spark 和 hadoop区别"></a>spark 和 hadoop区别</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p><em>hadoop</em> 是一个分布式数据基础设施。作用：用来存储</p><p><em>spark</em> 是处理数据的工具。作用：用来计算</p><h2 id="数据处理方式"><a href="#数据处理方式" class="headerlink" title="数据处理方式"></a>数据处理方式</h2><p>spark 比 hadoop MapReduce快很多</p><p><em>hadoop</em> 分布处理：读取-&gt;处理-&gt;存储-&gt;读取-&gt;处理-&gt;……</p><p><em>spark</em> 集中处理：读取-&gt;完成所有处理任务-&gt;存储</p><hr><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="一、如何给20G大小的文件，每一行是一个数字进行排序？"><a href="#一、如何给20G大小的文件，每一行是一个数字进行排序？" class="headerlink" title="一、如何给20G大小的文件，每一行是一个数字进行排序？"></a>一、如何给20G大小的文件，每一行是一个数字进行排序？</h2><p>K-归并。（Map-Reduce应用）</p><h2 id="二、分布式-ID-生成"><a href="#二、分布式-ID-生成" class="headerlink" title="二、分布式 ID 生成"></a>二、分布式 ID 生成</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>后端</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>大数据</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>每日小计划</title>
+    <link href="/2022/02/04/%E7%94%9F%E6%B4%BB/workflowy/"/>
+    <url>/2022/02/04/%E7%94%9F%E6%B4%BB/workflowy/</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h1 id="workflowy"><a href="#workflowy" class="headerlink" title="workflowy"></a>workflowy</h1><p>将要做的东西列出个表格，每日尽可能多的完成任务。</p><h1 id="番茄工作法"><a href="#番茄工作法" class="headerlink" title="番茄工作法"></a>番茄工作法</h1><p>治疗拖延症。作为发动机引擎<br>完成一件事情当做一种成就，而不是负担。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>生活</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>workflowy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vmware磁盘空间释放</title>
+    <link href="/2021/06/25/%E6%80%A8%E4%B8%96%E9%97%B4%E5%86%8D%E6%97%A0BUG/vmware%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E9%87%8A%E6%94%BE/"/>
+    <url>/2021/06/25/%E6%80%A8%E4%B8%96%E9%97%B4%E5%86%8D%E6%97%A0BUG/vmware%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E9%87%8A%E6%94%BE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vmware磁盘空间释放"><a href="#vmware磁盘空间释放" class="headerlink" title="vmware磁盘空间释放"></a>vmware磁盘空间释放</h1><p>占地太大，可以用如下命令存储碎片进行整理</p><p><code>$ sudo /usr/bin/vmware-toolbox-cmd disk shrink /</code></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>vmware</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>博客启动！</title>
+    <link href="/2021/06/16/%E6%97%A5%E8%AE%B0/hexo_write/"/>
+    <url>/2021/06/16/%E6%97%A5%E8%AE%B0/hexo_write/</url>
+    
+    <content type="html"><![CDATA[<p>blog.mornw.com!</p><span id="more"></span><h1 id="为什么写博客？"><a href="#为什么写博客？" class="headerlink" title="为什么写博客？"></a>为什么写博客？</h1><p>看见舍友的网站是在是好看，羡慕之余，自然也想自己做一个。</p><h1 id="做个什么样的网站？"><a href="#做个什么样的网站？" class="headerlink" title="做个什么样的网站？"></a>做个什么样的网站？</h1><p>问：越简单越好不是吗？<br>答：轻量级博客，静态网站、方便的整理自己的文章。让我找到了HEXO。</p><p>问：需要评论功能吗？<br>答：不需要，也没人看不是吗（当然我也想让人看啦！T.T）</p><p>问：图床用什么呀？<br>答：我是十分倾向于选择 github 的，很多人都说 github 访问速度慢，目前就使用 CDN 加速吧。</p><h1 id="开始博客搭建"><a href="#开始博客搭建" class="headerlink" title="开始博客搭建"></a>开始博客搭建</h1><p>想写博客，当然是先搭建图床啦！</p><h2 id="1-图床"><a href="#1-图床" class="headerlink" title="1. 图床"></a>1. 图床</h2><ol><li><p>在 github 上创建一个公开的图床仓库。</p></li><li><p>下载 PicGO。</p></li></ol><ul><li><p>github 生成自己的 token 时，需要勾选 repo 项。<br>  <img src="https://raw.githubusercontent.com/onlywant/blog_img/main/img/hexo_write/20220211152431.png"></p></li><li><p>设置 CDN 加速<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211153922.png"></p></li></ul><h2 id="2-安装-hexo-hexo-theme-melody"><a href="#2-安装-hexo-hexo-theme-melody" class="headerlink" title="2. 安装 hexo + hexo-theme-melody"></a>2. 安装 hexo + hexo-theme-melody</h2><ol><li><p>在 github 上创建一个 github pages。<br> 比如我的是： onlywant.github.io</p></li><li><p>安装 nodejs 和 npm。</p></li><li><p>创建一个博客文件夹</p></li><li><p><code>npm install hexo --save</code></p></li><li><p><code>npm install hexo-theme-melody --save</code></p></li><li><p>即可使用<code>hexo -g &amp;&amp; hexo -s</code>，生成自己的博客，本地查看。</p></li><li><p>推送到远端仓库</p><ul><li><p>设置博客根目录中的<code>_config.yml</code>中的<code>deploy</code>项为自己的 github pages 地址。<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211154803.png"></p></li><li><p>即可使用<code>hexo -d</code>推送到远端。</p></li></ul></li></ol><h2 id="3-使用github-actions自动编译发布网站"><a href="#3-使用github-actions自动编译发布网站" class="headerlink" title="3. 使用github actions自动编译发布网站"></a>3. 使用github actions自动编译发布网站</h2><ol><li><p>在 github 上创建 blog 源代码仓库，上传自己的源代码。<br><img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211155536.png"></p></li><li><p>设置两个仓库的沟通桥梁</p><ul><li>使用 ssh-keygen 生成一对公私钥。</li><li>在源代码仓库<code>settings-&gt;secrets-&gt;actions</code>中添加 <code>HEXO_DEPLOY_PRI</code>，内容为私钥。<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211160209.png"></li><li>在 pages 仓库<code>settings-&gt;deploy keys</code>中添加 <code>HEXO_DEPLOY_PUB</code>， 内容为公钥。<br> <img src="https://cdn.jsdelivr.net/gh/onlywant/blog_img/img/hexo_write/20220211160502.png"></li></ul></li><li><p>在仓库根目录下添加<code>.github/workflow/deploy.yml</code>文件。内容如下：</p> <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">CI</span><br><br><span class="hljs-attr">on:</span><br><span class="hljs-attr">push:</span><br><span class="hljs-attr">branches:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">master</span><br><br><span class="hljs-attr">env:</span><br><span class="hljs-attr">GIT_USER:</span> <span class="hljs-string">你的名字</span><br><span class="hljs-attr">GIT_EMAIL:</span> <span class="hljs-string">你的email地址</span><br><span class="hljs-attr">DEPLOY_REPO:</span> <span class="hljs-string">推送到的仓库</span><br><span class="hljs-attr">DEPLOY_BRANCH:</span> <span class="hljs-string">仓库分支</span><br><br><span class="hljs-attr">jobs:</span><br><span class="hljs-attr">build:</span><br><span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">on</span> <span class="hljs-string">node</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node_version</span> <span class="hljs-string">&#125;&#125;</span> <span class="hljs-string">and</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.os</span> <span class="hljs-string">&#125;&#125;</span><br><span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><span class="hljs-attr">strategy:</span><br><span class="hljs-attr">matrix:</span><br><span class="hljs-attr">os:</span> [<span class="hljs-string">ubuntu-latest</span>]<br><span class="hljs-attr">node_version:</span> [<span class="hljs-number">12.</span><span class="hljs-string">x</span>]<br><br><span class="hljs-attr">steps:</span><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span><br><span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">deploy</span> <span class="hljs-string">repo</span><br><span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span><br><span class="hljs-attr">with:</span><br><span class="hljs-attr">repository:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">env.DEPLOY_REPO</span> <span class="hljs-string">&#125;&#125;</span><br><span class="hljs-attr">ref:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">env.DEPLOY_BRANCH</span> <span class="hljs-string">&#125;&#125;</span><br><span class="hljs-attr">path:</span> <span class="hljs-string">.deploy_git</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">Node.js</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node_version</span> <span class="hljs-string">&#125;&#125;</span><br><span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span><br><span class="hljs-attr">with:</span><br><span class="hljs-attr">node-version:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node_version</span> <span class="hljs-string">&#125;&#125;</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Configuration</span> <span class="hljs-string">environment</span><br><span class="hljs-attr">env:</span><br><span class="hljs-attr">HEXO_DEPLOY_PRI:</span> <span class="hljs-string">$&#123;&#123;secrets.HEXO_DEPLOY_PRI&#125;&#125;</span><br><span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">timedatectl</span> <span class="hljs-string">set-timezone</span> <span class="hljs-string">&quot;Asia/Shanghai&quot;</span><br><span class="hljs-string">mkdir</span> <span class="hljs-string">-p</span> <span class="hljs-string">~/.ssh/</span><br><span class="hljs-string">echo</span> <span class="hljs-string">&quot;$HEXO_DEPLOY_PRI&quot;</span> <span class="hljs-string">&gt;</span> <span class="hljs-string">~/.ssh/id_rsa</span><br><span class="hljs-string">chmod</span> <span class="hljs-number">600</span> <span class="hljs-string">~/.ssh/id_rsa</span><br><span class="hljs-string">ssh-keyscan</span> <span class="hljs-string">github.com</span> <span class="hljs-string">&gt;&gt;</span> <span class="hljs-string">~/.ssh/known_hosts</span><br><span class="hljs-string">git</span> <span class="hljs-string">config</span> <span class="hljs-string">--global</span> <span class="hljs-string">user.name</span> <span class="hljs-string">$GIT_USER</span><br><span class="hljs-string">git</span> <span class="hljs-string">config</span> <span class="hljs-string">--global</span> <span class="hljs-string">user.email</span> <span class="hljs-string">$GIT_EMAIL</span><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span><br><span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">npm</span> <span class="hljs-string">install</span><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">hexo</span><br><span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">clean</span><br><span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">build</span><br><span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">deploy</span><br></code></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>博客</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
